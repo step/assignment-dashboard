@@ -13,23 +13,8 @@
             <div class="last-updated">Last updated: September 20, 2025 at 2:30 PM</div>
         </div>
 
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-number">67</div>
-                <div class="stat-label">Total Interns</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">89%</div>
-                <div class="stat-label">Pass Rate</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">2.3</div>
-                <div class="stat-label">Avg Issues</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">85%</div>
-                <div class="stat-label">Avg Score</div>
-            </div>
+        <div class="stats-grid" id="statsGrid">
+            <!-- Stats will be populated dynamically -->
         </div>
 
         <div class="search-container">
@@ -52,6 +37,14 @@
             <div class="intern-name" data-field="name"></div>
             <div class="score-badge" data-field="score"></div>
             <div class="hygiene-issues" data-field="issues"></div>
+        </div>
+    </template>
+
+    <!-- HTML Template for stat cards -->
+    <template id="statCardTemplate">
+        <div class="stat-card">
+            <div class="stat-number" data-field="value"></div>
+            <div class="stat-label" data-field="label"></div>
         </div>
     </template>
 

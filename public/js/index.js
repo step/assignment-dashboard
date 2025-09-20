@@ -69,20 +69,68 @@ const internData = [
   { name: "Quincy Ward", score: 91, issues: 1 },
 ];
 
-function getScoreClass(score) {
+// Calculate statistics from intern data
+const calculateStats = (data) => {
+  const totalInterns = data.length;
+  const passRate =
+    (data.filter((intern) => intern.score >= 70).length / totalInterns) * 100;
+  const avgIssues = data.reduce((sum, intern) => sum + intern.issues, 0) /
+    totalInterns;
+  const avgScore = data.reduce((sum, intern) => sum + intern.score, 0) /
+    totalInterns;
+
+  return {
+    totalInterns,
+    passRate: Math.round(passRate),
+    avgIssues: Math.round(avgIssues * 10) / 10, // Round to 1 decimal place
+    avgScore: Math.round(avgScore),
+  };
+};
+
+const getScoreClass = (score) => {
   if (score >= 80) return "score-pass";
   if (score >= 70) return "score-warning";
   return "score-fail";
-}
+};
 
-function getHygieneClass(issues) {
+const getHygieneClass = (issues) => {
   if (issues === 0) return "hygiene-low";
   if (issues <= 2) return "hygiene-low";
   if (issues <= 4) return "hygiene-medium";
   return "hygiene-high";
-}
+};
 
-function renderInterns(data) {
+const renderStats = (data) => {
+  const statsGrid = document.getElementById("statsGrid");
+  const template = document.getElementById("statCardTemplate");
+  const stats = calculateStats(data);
+
+  // Clear existing content
+  statsGrid.replaceChildren();
+
+  // Define the stats to display
+  const statsToDisplay = [
+    { value: stats.totalInterns, label: "Total Interns" },
+    { value: `${stats.passRate}%`, label: "Pass Rate" },
+    { value: stats.avgIssues, label: "Avg Issues" },
+    { value: `${stats.avgScore}%`, label: "Avg Score" },
+  ];
+
+  // Render each stat card
+  statsToDisplay.forEach((stat) => {
+    const clone = template.content.cloneNode(true);
+
+    const valueElement = clone.querySelector('[data-field="value"]');
+    const labelElement = clone.querySelector('[data-field="label"]');
+
+    valueElement.textContent = stat.value;
+    labelElement.textContent = stat.label;
+
+    statsGrid.appendChild(clone);
+  });
+};
+
+const renderInterns = (data) => {
   const internList = document.getElementById("internList");
   const template = document.getElementById("internRowTemplate");
 
@@ -108,7 +156,7 @@ function renderInterns(data) {
 
     internList.appendChild(clone);
   });
-}
+};
 
 // Search functionality
 document.getElementById("searchInput").addEventListener("input", function (e) {
@@ -117,7 +165,9 @@ document.getElementById("searchInput").addEventListener("input", function (e) {
     intern.name.toLowerCase().includes(searchTerm)
   );
   renderInterns(filteredData);
+  // Keep stats at full dataset level - do not update stats on filter
 });
 
 // Initial render
+renderStats(internData);
 renderInterns(internData);
