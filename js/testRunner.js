@@ -71,9 +71,17 @@ const runTestsForSingleFn = (fn, args, cases, orderIndependent) => {
   });
 };
 
-self.addEventListener("message", async (event) => {
-  const { name, code, fnName, cases, lintIssues, args, orderIndependent, allowMultipleLogs } =
-    event.data;
+self.addEventListener("message", (event) => {
+  const {
+    name,
+    code,
+    fnName,
+    cases,
+    lintIssues,
+    args,
+    orderIndependent,
+    allowMultipleLogs,
+  } = event.data;
 
   try {
     const fn = funcifyFn(code, fnName, args, allowMultipleLogs);

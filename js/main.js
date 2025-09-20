@@ -35,7 +35,10 @@ export const testAssignment = async (assignmentName) => {
       eslintConfig,
     }));
 
-    worker.queue(testJobs, (results) => console.log("All done", "*".repeat(100), "\n", results));
+    worker.queue(
+      testJobs,
+      (results) => console.log("All done", "*".repeat(100), "\n", results),
+    );
   } catch (e) {
     renderResults(template, { error: e.message });
   }

@@ -26,8 +26,8 @@ export const eslintConfig = {
     "no-multiple-empty-lines": [
       "error",
       {
-        "max": 1
-      }
+        "max": 1,
+      },
     ],
     "no-nested-ternary": "error",
     "no-shadow": "error",
@@ -37,6 +37,6 @@ export const eslintConfig = {
     "no-undefined": "error",
     "no-lonely-if": "error",
     "no-unused-vars": "warn",
-    "keyword-spacing": "error"
-  }
-}
+    "keyword-spacing": "error",
+  },
+};
