@@ -1,0 +1,68 @@
+[
+    {
+        "name": "compoundInterest",
+        "file": "01_compound_interest.js",
+        "fnName": "compoundInterest",
+        "args": [
+            "p",
+            "t",
+            "r"
+        ],
+        "cases": [
+            {
+                "desc": "Simple case with small values",
+                "inputs": {
+                    "p": 1000,
+                    "t": 2,
+                    "r": 10
+                },
+                "expected": 210.00
+            },
+            {
+                "desc": "Zero time period should return zero interest",
+                "inputs": {
+                    "p": 2000,
+                    "t": 0,
+                    "r": 12
+                },
+                "expected": 0.00
+            },
+            {
+                "desc": "Zero principal amount should return zero interest",
+                "inputs": {
+                    "p": 0,
+                    "t": 5,
+                    "r": 8
+                },
+                "expected": 0.00
+            },
+            {
+                "desc": "Fractional interest rate",
+                "inputs": {
+                    "p": 5000,
+                    "t": 2,
+                    "r": 2.5
+                },
+                "expected": 253.125
+            },
+            {
+                "desc": "Large principal with long duration",
+                "inputs": {
+                    "p": 100000,
+                    "t": 10,
+                    "r": 7
+                },
+                "expected": 96715.1357
+            },
+            {
+                "desc": "Single year compounding",
+                "inputs": {
+                    "p": 800,
+                    "t": 1,
+                    "r": 12
+                },
+                "expected": 96.00
+            }
+        ]
+    }
+]

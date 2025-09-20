@@ -1,0 +1,42 @@
+export const eslintConfig = {
+  "rules": {
+    "indent": ["error", 2, { "SwitchCase": 1 }],
+    "max-lines-per-function": ["error", 15],
+    "max-len": "error",
+    "semi": ["error", "always"],
+    "camelcase": "error",
+    "comma-spacing": "error",
+    "no-var": "error",
+    "curly": "error",
+    "brace-style": "error",
+    "eqeqeq": "error",
+    "id-length": "error",
+    "no-eval": "error",
+    "no-implicit-globals": "error",
+    "prefer-const": "error",
+    "no-process-exit": "error",
+    "no-process-env": "error",
+    "max-depth": ["error", { "max": 3 }],
+    "no-mixed-operators": "error",
+    "no-extra-parens": ["error", "all", { "nestedBinaryExpressions": false }],
+    "no-lone-blocks": "error",
+    "space-infix-ops": "error",
+    "no-multi-spaces": "error",
+    "semi-spacing": "error",
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1
+      }
+    ],
+    "no-nested-ternary": "error",
+    "no-shadow": "error",
+    "no-unused-expressions": "error",
+    "one-var-declaration-per-line": "error",
+    "yoda": "error",
+    "no-undefined": "error",
+    "no-lonely-if": "error",
+    "no-unused-vars": "warn",
+    "keyword-spacing": "error"
+  }
+}
