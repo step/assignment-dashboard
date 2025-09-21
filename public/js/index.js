@@ -1,9 +1,55 @@
 // Global variable to store intern data
 let assignmentResult = [];
 
+// Function to format assignment name from URL
+const formatAssignmentName = (assignmentId) => {
+  // Convert kebab-case to Title Case
+  return assignmentId
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+};
+
+// Function to update assignment title
+const updateAssignmentTitle = () => {
+  const assignmentId = globalThis.location.pathname.split("/")[1];
+  const titleElement = document.getElementById("assignmentTitle");
+  const pageTitleElement = document.getElementById("pageTitle");
+
+  if (assignmentId) {
+    const formattedName = formatAssignmentName(assignmentId);
+    if (titleElement) {
+      titleElement.textContent = formattedName;
+    }
+    if (pageTitleElement) {
+      pageTitleElement.textContent = `${formattedName} - Results`;
+    }
+  }
+};
+
+// Function to format and update last updated time
+const updateLastUpdated = (stats) => {
+  const lastUpdatedElement = document.getElementById("lastUpdated");
+  if (lastUpdatedElement && stats && stats.date) {
+    const date = new Date(stats.date);
+    const formattedDate = date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+    const formattedTime = date.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    });
+    lastUpdatedElement.textContent =
+      `Last updated: ${formattedDate} at ${formattedTime}`;
+  }
+};
+
 // Fetch assignment results from server
 const fetchAssignmentResults = async () => {
-  const assignmentId = window.location.pathname.split("/")[1];
+  const assignmentId = globalThis.location.pathname.split("/")[1];
   try {
     const response = await fetch(`/api/assignments/${assignmentId}/results`);
     if (!response.ok) {
@@ -113,7 +159,7 @@ const renderInterns = (data) => {
 // Search functionality
 document.getElementById("searchInput").addEventListener("input", function (e) {
   const searchTerm = e.target.value.toLowerCase();
-  const filteredData = internData.filter((intern) =>
+  const filteredData = assignmentResult.scores.filter((intern) =>
     intern.name.toLowerCase().includes(searchTerm)
   );
   renderInterns(filteredData);
@@ -123,6 +169,9 @@ document.getElementById("searchInput").addEventListener("input", function (e) {
 // Initialize the application
 const initializeApp = async () => {
   try {
+    // Update assignment title immediately
+    updateAssignmentTitle();
+
     // Show loading state
     showLoading();
 
@@ -130,6 +179,7 @@ const initializeApp = async () => {
 
     // Hide loading and render data
     hideLoading();
+    updateLastUpdated(assignmentResult.stats);
     renderStats(assignmentResult.stats);
     renderInterns(assignmentResult.scores);
   } catch (_error) {
