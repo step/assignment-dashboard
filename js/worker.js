@@ -22,7 +22,8 @@ const addSummary = (results, total) => {
     passed += error ? 0 : tests.filter(({ pass }) => pass).length;
     lintErrors += lintIssues ? lintIssues.length : 0;
   });
-  return { total, passed, failed: total - passed, lintErrors };
+  const percentage = total === 0 ? 0 : Math.floor((passed / total) * 100);
+  return { total, passed, failed: total - passed, lintErrors, percentage };
 };
 
 let batchWorker = null;
@@ -99,6 +100,11 @@ self.addEventListener("message", async (event) => {
       self.postMessage({ name: githubId, summary, results });
     });
   } catch (e) {
-    self.postMessage({ name: githubId, error: e.message });
+    self.postMessage({
+      name: githubId,
+      error: e.message,
+      summary: { total: 0, passed: 0, failed: 0, lintErrors: 0, percentage: 0 },
+      results: []
+    });
   }
 });

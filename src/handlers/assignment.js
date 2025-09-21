@@ -1,17 +1,16 @@
+import { assignments } from "../../config/assignments.js";
 import { testAssignment } from "../../js/main.js";
 
-const calPercentage = (summary) => {
-  if (!summary) return 0;
-  return Math.floor((summary.passed / summary.total) * 100);
-};
-
-const calculateStats = (data) => {
-  const totalInterns = data.length;
+const calculateStats = (scores) => {
+  console.log(scores);
+  const totalInterns = scores.length;
   const passRate =
-    (data.filter((intern) => intern.score >= 70).length / totalInterns) * 100;
-  const avgIssues = data.reduce((sum, intern) => sum + intern.issues, 0) /
+    (scores.filter((intern) => intern.score >= 70).length / totalInterns) * 100;
+  const avgIssues =
+    scores.reduce((sum, intern) => sum + intern.summary.lintErrors, 0) /
     totalInterns;
-  const avgScore = data.reduce((sum, intern) => sum + intern.score, 0) /
+  const avgScore =
+    scores.reduce((sum, intern) => sum + intern.summary.percentage, 0) /
     totalInterns;
 
   return {
@@ -28,12 +27,13 @@ export const getAssignmentEvaluation = async (c, store) => {
   const scoresView = scores.map(({ name, summary }) => {
     return {
       name,
-      score: calPercentage(summary),
-      issues: summary ? summary.lintErrors : 0,
+      score: summary.percentage,
+      issues: summary.lintErrors,
     };
   });
+  const stats = await store.getStats(assignmentId);
   return {
-    stats: calculateStats(scoresView),
+    stats,
     scores: scoresView,
   };
 };
@@ -42,7 +42,16 @@ export const evaluateAssignment = async (c, store) => {
   const assignmentId = c.req.param("assignmentId");
   console.log(c.req.param("assignmentId"));
   console.log(`${assignmentId} evaluation started`);
+  const date = new Date();
   const scores = await testAssignment(assignmentId);
   console.log(`${assignmentId} evaluation completed`);
-  store.addScores(assignmentId, scores);
+
+  await store.addStats(assignmentId, {
+    ...calculateStats(scores),
+    date,
+    name: assignmentId,
+  });
+  await store.addScores(assignmentId, scores);
 };
+
+export const getAssignments = (store) => store.getAssignmentStats(assignments);

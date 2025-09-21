@@ -6,12 +6,17 @@ import ScoresStore from "./scores_store.js";
 import {
   evaluateAssignment,
   getAssignmentEvaluation,
+  getAssignments,
 } from "./handlers/assignment.js";
 
 export const createApp = async () => {
   const app = new Hono();
   const store = await ScoresStore.create();
   app.use("*", logger());
+
+  app.get("/api/assignments", async (c) => {
+    return c.json(await getAssignments(store));
+  });
 
   // API endpoint to serve assignment results
   app.get("/api/assignments/:assignmentId/results", async (c) => {
