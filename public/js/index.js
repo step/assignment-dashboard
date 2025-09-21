@@ -1,5 +1,5 @@
 // Global variable to store intern data
-let internData = [];
+let assignmentResult = [];
 
 // Fetch assignment results from server
 const fetchAssignmentResults = async () => {
@@ -40,24 +40,6 @@ const showError = (message) => {
   internList.innerHTML = `<div class="error-message">${message}</div>`;
 };
 
-// Calculate statistics from intern data
-const calculateStats = (data) => {
-  const totalInterns = data.length;
-  const passRate =
-    (data.filter((intern) => intern.score >= 70).length / totalInterns) * 100;
-  const avgIssues = data.reduce((sum, intern) => sum + intern.issues, 0) /
-    totalInterns;
-  const avgScore = data.reduce((sum, intern) => sum + intern.score, 0) /
-    totalInterns;
-
-  return {
-    totalInterns,
-    passRate: Math.round(passRate),
-    avgIssues: Math.round(avgIssues * 10) / 10, // Round to 1 decimal place
-    avgScore: Math.round(avgScore),
-  };
-};
-
 const getScoreClass = (score) => {
   if (score >= 80) return "score-pass";
   if (score >= 70) return "score-warning";
@@ -71,10 +53,9 @@ const getHygieneClass = (issues) => {
   return "hygiene-high";
 };
 
-const renderStats = (data) => {
+const renderStats = (stats) => {
   const statsGrid = document.getElementById("statsGrid");
   const template = document.getElementById("statCardTemplate");
-  const stats = calculateStats(data);
 
   // Clear existing content
   statsGrid.replaceChildren();
@@ -145,13 +126,12 @@ const initializeApp = async () => {
     // Show loading state
     showLoading();
 
-    // Fetch assignment results from server
-    internData = await fetchAssignmentResults();
+    assignmentResult = await fetchAssignmentResults();
 
     // Hide loading and render data
     hideLoading();
-    renderStats(internData);
-    renderInterns(internData);
+    renderStats(assignmentResult.stats);
+    renderInterns(assignmentResult.scores);
   } catch (_error) {
     hideLoading();
     showError("Failed to load assignment results. Please try again later.");

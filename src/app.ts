@@ -9,6 +9,29 @@ const calPercentage = (summary?: { total: number; passed: number }) => {
   return Math.floor((summary.passed / summary.total) * 100);
 };
 
+type InternAssignmentReport = {
+  name: string;
+  score: number;
+  issues: number;
+};
+
+const calculateStats = (data: InternAssignmentReport[]) => {
+  const totalInterns = data.length;
+  const passRate =
+    (data.filter((intern) => intern.score >= 70).length / totalInterns) * 100;
+  const avgIssues = data.reduce((sum, intern) => sum + intern.issues, 0) /
+    totalInterns;
+  const avgScore = data.reduce((sum, intern) => sum + intern.score, 0) /
+    totalInterns;
+
+  return {
+    totalInterns,
+    passRate: Math.round(passRate),
+    avgIssues: Math.round(avgIssues * 10) / 10, // Round to 1 decimal place
+    avgScore: Math.round(avgScore),
+  };
+};
+
 export const createApp = async () => {
   const app = new Hono();
   const store = await ScoresStore.create();
@@ -25,7 +48,10 @@ export const createApp = async () => {
         issues: summary ? summary.lintErrors : 0,
       };
     });
-    return c.json(scoresView);
+    return c.json({
+      stats: calculateStats(scoresView),
+      scores: scoresView,
+    });
   });
 
   app.post("/api/assignments/evaluate", (c) => {
