@@ -2,7 +2,6 @@ import { assignments } from "../../config/assignments.js";
 import { testAssignment } from "../../js/main.js";
 
 const calculateStats = (scores) => {
-  console.log(scores);
   const totalInterns = scores.length;
   const passRate =
     (scores.filter((intern) => intern.score >= 70).length / totalInterns) * 100;
@@ -38,13 +37,11 @@ export const getAssignmentEvaluation = async (c, store) => {
   };
 };
 
-export const evaluateAssignment = async (c, store) => {
-  const assignmentId = c.req.param("assignmentId");
-  console.log(c.req.param("assignmentId"));
-  console.log(`${assignmentId} evaluation started`);
+export const evaluateAssignment = async (assignmentId, store) => {
+  console.log("*".repeat(10), `${assignmentId} evaluation started`);
   const date = new Date();
   const scores = await testAssignment(assignmentId);
-  console.log(`${assignmentId} evaluation completed`);
+  console.log("*".repeat(10), `${assignmentId} evaluation completed`);
 
   await store.addStats(assignmentId, {
     ...calculateStats(scores),

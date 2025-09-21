@@ -25,11 +25,11 @@ export const createApp = async () => {
   });
 
   app.post("/api/assignments/:assignmentId/evaluate", (c) => {
-    evaluateAssignment(c, store);
+    evaluateAssignment(c.req.param("assignmentId"), store);
     return c.json({ status: "Evaluation started" });
   });
 
-  app.post("/api/webhook", (c) => handleWebhook(c))
+  app.post("/api/webhook", (c) => handleWebhook(c, store));
 
   app.get(
     "/:assignment/scores.html",

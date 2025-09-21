@@ -1,4 +1,5 @@
 import { githubIds } from "../../config/github_ids.js";
+import { evaluateAssignment } from "./assignment.js";
 
 const fetchRepo = async (organization, repo) => {
   const codeUrl =
@@ -15,31 +16,34 @@ const fetchRepo = async (organization, repo) => {
 
 const getRepoDetails = (fullName) => {
   const [organization, repo] = fullName.split("/");
-  const githubUsername = githubIds.find((id) => repo.endsWith(id));
-  if (!githubUsername) {
-    return null;
-  }
+  const githubUsername = githubIds.find((id) => fullName.endsWith(`-${id}`));
   const assignmentName = repo.replace(`-${githubUsername}`, "");
-  return { organization, repo, githubUsername, assignmentName };
+  return { organization, assignmentName };
 };
 
-const updateRepo = async (fullName) => {
+const fetchRepos = async (organization, assignmentName) => {
+  return await Promise.all(githubIds.map(async (username) => {
+    const code = await fetchRepo(organization, `${assignmentName}-${username}`);
+    await Deno.writeFile(
+      `./source/${assignmentName}/${username}.zip`,
+      new Uint8Array(code),
+    );
+  }));
+};
+
+// Updating all the repo for the assignment as deno deploy may change the underlying machine due to which previous repos may be lost
+const updateRepo = async (fullName, store) => {
   const repoDetails = getRepoDetails(fullName);
-  if (!repoDetails) return;
-  const { organization, repo, githubUsername, assignmentName } = repoDetails;
+  const { organization, assignmentName } = repoDetails;
 
   await Deno.mkdir(`./source/${assignmentName}`, { recursive: true });
-  const code = await fetchRepo(organization, repo);
-  await Deno.writeFile(
-    `./source/${assignmentName}/${githubUsername}.zip`,
-    new Uint8Array(code),
-  );
-  console.log(`Updated repository: ${fullName}`);
+  await fetchRepos(organization, assignmentName);
+  evaluateAssignment(assignmentName, store);
 };
 
-export const handleWebhook = async (c) => {
+export const handleWebhook = async (c, store) => {
   const payload = await c.req.json();
   const { repository: { full_name } } = payload;
-  updateRepo(full_name);
+  updateRepo(full_name, store);
   return c.json({ message: `Received webhook for repository: ${name}` });
 };
