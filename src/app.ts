@@ -15,8 +15,9 @@ export const createApp = async () => {
   app.use("*", logger());
 
   // API endpoint to serve assignment results
-  app.get("/api/assignments/results", async (c) => {
-    const scores = await store.getScores("js-assignment-1");
+  app.get("/api/assignments/:assignmentId/results", async (c) => {
+    const assignmentId = c.req.param("assignmentId");
+    const scores = await store.getScores(assignmentId);
     const scoresView = scores.map(({ name, summary }) => {
       return {
         name,
@@ -35,7 +36,10 @@ export const createApp = async () => {
     return c.json({ status: "Evaluation started" });
   });
 
-  app.get("/", serveStatic({ path: "./public/html/index.html" }));
+  app.get(
+    "/:assignment/scores.html",
+    serveStatic({ path: "./public/html/scores.html" }),
+  );
   app.get("*", serveStatic({ root: "./public" }));
 
   return app;

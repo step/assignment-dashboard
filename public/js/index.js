@@ -3,8 +3,9 @@ let internData = [];
 
 // Fetch assignment results from server
 const fetchAssignmentResults = async () => {
+  const assignmentId = window.location.pathname.split("/")[1];
   try {
-    const response = await fetch("/api/assignments/results");
+    const response = await fetch(`/api/assignments/${assignmentId}/results`);
     if (!response.ok) {
       throw new Error(`Failed to fetch assignment results: ${response.status}`);
     }
