@@ -1,12 +1,42 @@
 import { Hono } from "hono";
-import { logger } from "hono/logger";
 import { serveStatic } from "hono/deno";
+import { logger } from "hono/logger";
+import ScoresStore from "./scores_store.js";
+import { testAssignment } from "../js/main.js";
 
-const app = new Hono();
+const calPercentage = (summary?: { total: number; passed: number }) => {
+  if (!summary) return 0;
+  return Math.floor((summary.passed / summary.total) * 100);
+};
 
-app.use("*", logger());
+export const createApp = async () => {
+  const app = new Hono();
+  const store = await ScoresStore.create();
+  app.use("*", logger());
 
-app.get("/", serveStatic({ path: "./public/html/index.html" }));
-app.get("*", serveStatic({ root: "./public" }));
+  // API endpoint to serve assignment results
+  app.get("/api/assignments/results", async (c) => {
+    const scores = await store.getScores("js-assignment-1");
+    const scoresView = scores.map(({ name, summary }) => {
+      return {
+        name,
+        score: calPercentage(summary),
+        issues: summary ? summary.lintErrors : 0,
+      };
+    });
+    return c.json(scoresView);
+  });
 
-export { app };
+  app.post("/api/assignments/evaluate", (c) => {
+    testAssignment("js-assignment-1").then((scores) => {
+      console.log("js-assignment-1 evaluation completed");
+      store.addScores("js-assignment-1", scores);
+    });
+    return c.json({ status: "Evaluation started" });
+  });
+
+  app.get("/", serveStatic({ path: "./public/html/index.html" }));
+  app.get("*", serveStatic({ root: "./public" }));
+
+  return app;
+};

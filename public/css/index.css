@@ -240,3 +240,20 @@ body {
     border-color: #80bdff;
     box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
+
+/* Loading and error message styles */
+.loading-message {
+    padding: 40px 20px;
+    text-align: center;
+    color: #6c757d;
+    font-style: italic;
+}
+
+.error-message {
+    padding: 40px 20px;
+    text-align: center;
+    color: #721c24;
+    background-color: #f8d7da;
+    border-radius: 4px;
+    margin: 16px;
+}

@@ -64,5 +64,107 @@
         "expected": 96.00
       }
     ]
+  },
+  {
+    "name": "simpleInterest",
+    "file": "17_simple_interest.js",
+    "fnName": "simpleInterest",
+    "args": [
+      "p",
+      "t",
+      "r"
+    ],
+    "cases": [
+      {
+        "desc": "Simple case with p=100, r=5, t=2",
+        "inputs": {
+          "p": 100,
+          "r": 5,
+          "t": 2
+        },
+        "expected": 10
+      },
+      {
+        "desc": "Principal only 100, rate=10%, time=1 year",
+        "inputs": {
+          "p": 100,
+          "r": 10,
+          "t": 1
+        },
+        "expected": 10
+      },
+      {
+        "desc": "Higher time duration (5 years)",
+        "inputs": {
+          "p": 200,
+          "r": 5,
+          "t": 5
+        },
+        "expected": 50
+      },
+      {
+        "desc": "Zero interest rate",
+        "inputs": {
+          "p": 500,
+          "r": 0,
+          "t": 3
+        },
+        "expected": 0
+      },
+      {
+        "desc": "Large principal, medium rate, short time",
+        "inputs": {
+          "p": 1000,
+          "r": 5,
+          "t": 1
+        },
+        "expected": 50
+      },
+      {
+        "desc": "Large principal, large rate, longer time",
+        "inputs": {
+          "p": 1000,
+          "r": 10,
+          "t": 2
+        },
+        "expected": 200
+      },
+      {
+        "desc": "Medium values, testing multiplication",
+        "inputs": {
+          "p": 150,
+          "r": 6,
+          "t": 2
+        },
+        "expected": 18
+      },
+      {
+        "desc": "Small values (edge case)",
+        "inputs": {
+          "p": 50,
+          "r": 2,
+          "t": 2
+        },
+        "expected": 2
+      },
+      {
+        "desc": "Large test case",
+        "inputs": {
+          "p": 10000,
+          "r": 12,
+          "t": 5
+        },
+        "expected": 6000
+      },
+      {
+        "desc": "Checking with t=10 years",
+        "inputs": {
+          "p": 100,
+          "r": 5,
+          "t": 10
+        },
+        "expected": 50
+      }
+    ]
   }
 ]

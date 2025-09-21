@@ -1,6 +1,6 @@
 {
   "tasks": {
-    "dev": "deno run -A --watch=main.ts,src,public main.ts"
+    "dev": "touch scores_db && deno run -A --unstable-kv --watch=main.ts,src,public main.ts"
   },
   "imports": {
     "@std/assert": "jsr:@std/assert@1",

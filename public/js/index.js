@@ -1,73 +1,43 @@
-// Sample data generation
-const internData = [
-  { name: "Alice Johnson", score: 92, issues: 1 },
-  { name: "Bob Smith", score: 78, issues: 4 },
-  { name: "Carol Davis", score: 95, issues: 0 },
-  { name: "David Wilson", score: 65, issues: 6 },
-  { name: "Emma Brown", score: 88, issues: 2 },
-  { name: "Frank Miller", score: 91, issues: 1 },
-  { name: "Grace Lee", score: 76, issues: 3 },
-  { name: "Henry Taylor", score: 83, issues: 2 },
-  { name: "Ivy Chen", score: 94, issues: 1 },
-  { name: "Jack Anderson", score: 72, issues: 5 },
-  { name: "Kate Rodriguez", score: 89, issues: 2 },
-  { name: "Liam O'Connor", score: 86, issues: 3 },
-  { name: "Maya Patel", score: 93, issues: 1 },
-  { name: "Noah Kim", score: 79, issues: 4 },
-  { name: "Olivia Garcia", score: 87, issues: 2 },
-  { name: "Paul Martinez", score: 84, issues: 3 },
-  { name: "Quinn Thompson", score: 90, issues: 1 },
-  { name: "Rachel White", score: 77, issues: 4 },
-  { name: "Sam Johnson", score: 85, issues: 2 },
-  { name: "Tara Singh", score: 92, issues: 1 },
-  { name: "Uma Sharma", score: 88, issues: 2 },
-  { name: "Victor Lopez", score: 81, issues: 3 },
-  { name: "Wendy Chang", score: 96, issues: 0 },
-  { name: "Xavier Nguyen", score: 74, issues: 5 },
-  { name: "Yuki Tanaka", score: 89, issues: 2 },
-  { name: "Zoe Williams", score: 87, issues: 2 },
-  { name: "Adam Foster", score: 91, issues: 1 },
-  { name: "Beth Cooper", score: 78, issues: 4 },
-  { name: "Chris Evans", score: 85, issues: 3 },
-  { name: "Dana Scott", score: 93, issues: 1 },
-  { name: "Eric Wang", score: 80, issues: 3 },
-  { name: "Fiona Bell", score: 88, issues: 2 },
-  { name: "Greg Adams", score: 75, issues: 4 },
-  { name: "Hannah Lee", score: 94, issues: 1 },
-  { name: "Ian Murphy", score: 82, issues: 3 },
-  { name: "Jess Parker", score: 89, issues: 2 },
-  { name: "Kyle Davis", score: 86, issues: 2 },
-  { name: "Luna Rodriguez", score: 91, issues: 1 },
-  { name: "Matt Wilson", score: 77, issues: 4 },
-  { name: "Nina Patel", score: 90, issues: 2 },
-  { name: "Owen Clark", score: 84, issues: 3 },
-  { name: "Priya Gupta", score: 92, issues: 1 },
-  { name: "Ryan Turner", score: 79, issues: 4 },
-  { name: "Sara Kim", score: 87, issues: 2 },
-  { name: "Tom Baker", score: 85, issues: 3 },
-  { name: "Vera Chen", score: 94, issues: 1 },
-  { name: "Will Jones", score: 81, issues: 3 },
-  { name: "Xara Ahmed", score: 88, issues: 2 },
-  { name: "Yuki Sato", score: 90, issues: 1 },
-  { name: "Zara Ali", score: 86, issues: 2 },
-  { name: "Alex Carter", score: 83, issues: 3 },
-  { name: "Bella Ross", score: 91, issues: 1 },
-  { name: "Carl Jensen", score: 76, issues: 4 },
-  { name: "Delia Moore", score: 89, issues: 2 },
-  { name: "Ethan Brooks", score: 87, issues: 2 },
-  { name: "Faye Collins", score: 92, issues: 1 },
-  { name: "Gary Hill", score: 78, issues: 4 },
-  { name: "Hina Shah", score: 95, issues: 0 },
-  { name: "Isaac Reed", score: 84, issues: 3 },
-  { name: "Jade Wong", score: 88, issues: 2 },
-  { name: "Kevin Liu", score: 85, issues: 3 },
-  { name: "Lisa Green", score: 90, issues: 1 },
-  { name: "Mike Torres", score: 82, issues: 3 },
-  { name: "Nora Phillips", score: 93, issues: 1 },
-  { name: "Oscar Rivera", score: 79, issues: 4 },
-  { name: "Penny Cox", score: 87, issues: 2 },
-  { name: "Quincy Ward", score: 91, issues: 1 },
-];
+// Global variable to store intern data
+let internData = [];
+
+// Fetch assignment results from server
+const fetchAssignmentResults = async () => {
+  try {
+    const response = await fetch("/api/assignments/results");
+    if (!response.ok) {
+      throw new Error(`Failed to fetch assignment results: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching assignment results:", error);
+    throw error;
+  }
+};
+
+// Loading and error handling functions
+const showLoading = () => {
+  const statsGrid = document.getElementById("statsGrid");
+  const internList = document.getElementById("internList");
+
+  statsGrid.innerHTML =
+    '<div class="loading-message">Loading statistics...</div>';
+  internList.innerHTML =
+    '<div class="loading-message">Loading assignment results...</div>';
+};
+
+const hideLoading = () => {
+  // Loading content will be replaced by actual data
+};
+
+const showError = (message) => {
+  const statsGrid = document.getElementById("statsGrid");
+  const internList = document.getElementById("internList");
+
+  statsGrid.innerHTML = `<div class="error-message">${message}</div>`;
+  internList.innerHTML = `<div class="error-message">${message}</div>`;
+};
 
 // Calculate statistics from intern data
 const calculateStats = (data) => {
@@ -168,6 +138,24 @@ document.getElementById("searchInput").addEventListener("input", function (e) {
   // Keep stats at full dataset level - do not update stats on filter
 });
 
-// Initial render
-renderStats(internData);
-renderInterns(internData);
+// Initialize the application
+const initializeApp = async () => {
+  try {
+    // Show loading state
+    showLoading();
+
+    // Fetch assignment results from server
+    internData = await fetchAssignmentResults();
+
+    // Hide loading and render data
+    hideLoading();
+    renderStats(internData);
+    renderInterns(internData);
+  } catch (_error) {
+    hideLoading();
+    showError("Failed to load assignment results. Please try again later.");
+  }
+};
+
+// Run initialization when page loads
+document.addEventListener("DOMContentLoaded", initializeApp);
