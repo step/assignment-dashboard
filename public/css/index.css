@@ -25,6 +25,56 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.header-text {
+    flex: 1;
+}
+
+.header-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.back-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.back-button:hover {
+    background: #0056b3;
+    transform: translateY(-1px);
+    color: white;
+    text-decoration: none;
+}
+
+.back-button:active {
+    transform: translateY(0);
+}
+
+.back-icon {
+    width: 16px;
+    height: 16px;
+}
+
 .assignment-title {
     font-size: 24px;
     font-weight: 600;
@@ -168,6 +218,20 @@ body {
 
     .assignment-title {
         font-size: 20px;
+    }
+
+    .header-content {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .header-actions {
+        align-items: stretch;
+    }
+
+    .back-button {
+        justify-content: center;
     }
 
     .intern-row {
