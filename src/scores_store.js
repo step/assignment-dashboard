@@ -32,6 +32,11 @@ export default class ScoresStore {
       .map((r) => r.value);
   }
 
+  async clear() {
+    await this.#store.delete(["stats"]);
+    await this.#store.delete(["js-assignment-1"]);
+  }
+
   static async create() {
     const kv = await Deno.openKv();
     return new ScoresStore(kv);

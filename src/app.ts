@@ -38,5 +38,10 @@ export const createApp = async () => {
   app.get("/", serveStatic({ path: "./public/html/index.html" }));
   app.get("*", serveStatic({ root: "./public" }));
 
+  app.get("/clear", async (c) => {
+    await store.clear();
+    return c.json({ status: "cleared" });
+  });
+
   return app;
 };
