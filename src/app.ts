@@ -32,6 +32,7 @@ export const createApp = async () => {
     "/:assignment/scores.html",
     serveStatic({ path: "./public/html/scores.html" }),
   );
+  app.get("/", serveStatic({ path: "./public/html/index.html" }));
   app.get("*", serveStatic({ root: "./public" }));
 
   return app;
