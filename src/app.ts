@@ -8,6 +8,7 @@ import {
   getAssignmentEvaluation,
   getAssignments,
 } from "./handlers/assignment.js";
+import { handleWebhook } from "./handlers/webhook.js";
 
 export const createApp = async () => {
   const app = new Hono();
@@ -27,6 +28,8 @@ export const createApp = async () => {
     evaluateAssignment(c, store);
     return c.json({ status: "Evaluation started" });
   });
+
+  app.post("/api/webhook", (c) => handleWebhook(c))
 
   app.get(
     "/:assignment/scores.html",
