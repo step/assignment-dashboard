@@ -33,7 +33,7 @@ export default class ScoresStore {
   }
 
   static async create() {
-    const kv = await Deno.openKv("./scores_db");
+    const kv = await Deno.openKv();
     return new ScoresStore(kv);
   }
 }
