@@ -2,35 +2,11 @@ import { Hono } from "hono";
 import { serveStatic } from "hono/deno";
 import { logger } from "hono/logger";
 import ScoresStore from "./scores_store.js";
-import { testAssignment } from "../js/main.js";
 
-const calPercentage = (summary?: { total: number; passed: number }) => {
-  if (!summary) return 0;
-  return Math.floor((summary.passed / summary.total) * 100);
-};
-
-type InternAssignmentReport = {
-  name: string;
-  score: number;
-  issues: number;
-};
-
-const calculateStats = (data: InternAssignmentReport[]) => {
-  const totalInterns = data.length;
-  const passRate =
-    (data.filter((intern) => intern.score >= 70).length / totalInterns) * 100;
-  const avgIssues = data.reduce((sum, intern) => sum + intern.issues, 0) /
-    totalInterns;
-  const avgScore = data.reduce((sum, intern) => sum + intern.score, 0) /
-    totalInterns;
-
-  return {
-    totalInterns,
-    passRate: Math.round(passRate),
-    avgIssues: Math.round(avgIssues * 10) / 10, // Round to 1 decimal place
-    avgScore: Math.round(avgScore),
-  };
-};
+import {
+  evaluateAssignment,
+  getAssignmentEvaluation,
+} from "./handlers/assignment.js";
 
 export const createApp = async () => {
   const app = new Hono();
@@ -39,26 +15,11 @@ export const createApp = async () => {
 
   // API endpoint to serve assignment results
   app.get("/api/assignments/:assignmentId/results", async (c) => {
-    const assignmentId = c.req.param("assignmentId");
-    const scores = await store.getScores(assignmentId);
-    const scoresView = scores.map(({ name, summary }) => {
-      return {
-        name,
-        score: calPercentage(summary),
-        issues: summary ? summary.lintErrors : 0,
-      };
-    });
-    return c.json({
-      stats: calculateStats(scoresView),
-      scores: scoresView,
-    });
+    return c.json(await getAssignmentEvaluation(c, store));
   });
 
-  app.post("/api/assignments/evaluate", (c) => {
-    testAssignment("js-assignment-1").then((scores) => {
-      console.log("js-assignment-1 evaluation completed");
-      store.addScores("js-assignment-1", scores);
-    });
+  app.post("/api/assignments/:assignmentId/evaluate", (c) => {
+    evaluateAssignment(c, store);
     return c.json({ status: "Evaluation started" });
   });
 
