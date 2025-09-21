@@ -33,8 +33,16 @@ export default class ScoresStore {
   }
 
   async clear() {
-    await this.#store.delete(["stats"]);
-    await this.#store.delete(["js-assignment-1"]);
+    const stats = await Array.fromAsync(await this.#store.list({ prefix: ["stats"] }));
+    const assignments = await Array.fromAsync(
+      await this.#store.list({ prefix: ["js-assignment-1"] }),
+    );
+    stats.forEach((s) => {
+      this.#store.delete(s.key);
+    });
+    assignments.forEach((a) => {
+      this.#store.delete(a.key);
+    });
   }
 
   static async create() {
