@@ -6,12 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>React Fundamentals Assignment</title>
     <link rel="stylesheet" href="../css/adminPanel.css">
+    <!-- Prism.js CSS for syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css"
+        rel="stylesheet" />
 </head>
 
 <body>
     <!-- Main Intern List View -->
     <div id="main-view">
-        <div class="container">
+        <div class="container flex-column">
             <div class="header">
                 <h1>React Fundamentals Assignment</h1>
                 <div class="header-stats">
@@ -131,28 +135,7 @@
 
                     <div id="code-content" style="display: none;">
                         <div class="code-container">
-                            <div class="code">import React, { useState } from 'react';
-
-                                const GreetingComponent = ({ name }) => {
-                                const [count, setCount] = useState(0);
-                                const userName = 'Alice'; // This variable is unused
-
-                                const handleClick = () => {
-                                setCount(count + 1);
-                                };
-
-                                return (
-                                &lt;div className="greeting"&gt;
-                                &lt;h1&gt;Hello, World!&lt;/h1&gt;
-                                &lt;p&gt;Count: {count}&lt;/p&gt;
-                                &lt;button onClick={handleClick}&gt;
-                                Click me
-                                &lt;/button&gt;
-                                &lt;/div&gt;
-                                );
-                                };
-
-                                export default GreetingComponent;</div>
+                            <pre class="line-numbers"><code class="language-javascript"></code></pre>
                         </div>
                     </div>
                 </div>
@@ -161,6 +144,12 @@
     </div>
 
     <script src="../js/adminPanel.js"></script>
+    <!-- Prism.js for syntax highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
 </body>
 
 </html>

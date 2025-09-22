@@ -17,6 +17,11 @@ body {
     padding: 16px;
 }
 
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
 .header {
     background: white;
     border-radius: 8px;
@@ -471,13 +476,45 @@ body {
     overflow: hidden;
 }
 
-.code {
-    padding: 20px;
+.code-container pre {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+}
+
+.code-container code {
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
     font-size: 13px;
     line-height: 1.6;
+}
+
+/* Override Prism.js styles to match our design */
+pre[class*="language-"] {
+    margin: 0;
+    padding: 20px;
+    background: #f8f9fa !important;
+    border-radius: 0;
     overflow-x: auto;
-    white-space: pre;
+}
+
+code[class*="language-"] {
+    background: transparent;
+    color: #24292e;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* Line numbers styling */
+.line-numbers .line-numbers-rows {
+    border-right: 1px solid #d1d5da;
+    padding-right: 8px;
+    margin-right: 8px;
+}
+
+.line-numbers-rows>span:before {
+    color: #6a737d;
+    font-size: 12px;
 }
 
 /* Mobile First - Small screens */

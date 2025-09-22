@@ -416,10 +416,22 @@ function updateCodeContent() {
 
   codeContent.innerHTML = `
     <div class="code-container">
-      <div class="code">${escapedCode}</div>
+      <pre class="line-numbers"><code class="language-javascript">${escapedCode}</code></pre>
     </div>
   `;
+
+  // Trigger Prism.js syntax highlighting for the new content
+  if (typeof Prism !== "undefined") {
+    Prism.highlightAllUnder(codeContent);
+  }
 }
 
 // Initialize the application
-init();
+document.addEventListener("DOMContentLoaded", function () {
+  init();
+
+  // Initialize Prism.js for any existing code blocks
+  if (typeof Prism !== "undefined") {
+    Prism.highlightAll();
+  }
+});
