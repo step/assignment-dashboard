@@ -35,22 +35,8 @@ const startBatchWorker = () => {
 
 startBatchWorker();
 
-const SOCMarker = "// START YOUR CODE AFTER THIS LINE. DO NOT REMOVE THIS LINE";
-
-const disableLintForSOC = (code) => {
-  const [beforeSOC, afterSOC] = code.split(SOCMarker);
-  return `
-  /* eslint-disable */
-  ${beforeSOC}
-  ${SOCMarker}
-  /* eslint-enable */
-  ${afterSOC}
-  `;
-};
-
 const lintCode = (linter, code, lintConfig) => {
-  const codeToLint = code.includes(SOCMarker) ? disableLintForSOC(code) : code;
-  return linter.verify(codeToLint, lintConfig);
+  return linter.verify(code, lintConfig);
 };
 
 const createJobs = async (blobURL, tests, lintConfig) => {
