@@ -28,7 +28,6 @@ export const githubIds = [
   "Haider-GitHubRepo",
   "d-joz",
   "siridalasari",
-  "Bughunterkarthik",
   "fake-smiler-115",
   "Dra-vyn",
   "gauthx",
