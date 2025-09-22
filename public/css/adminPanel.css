@@ -1,0 +1,422 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+.header {
+    background: white;
+    border-bottom: 1px solid #e9ecef;
+    padding: 1.5rem 2rem;
+}
+
+.header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.header-stats {
+    display: flex;
+    gap: 3rem;
+    margin-bottom: 1rem;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #28a745;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: #6c757d;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.header-info {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.search-container {
+    background: white;
+    padding: 0 2rem 1.5rem 2rem;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.search-box {
+    width: 300px;
+    padding: 0.75rem 1rem;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    background: #f8f9fa;
+}
+
+.search-box:focus {
+    outline: none;
+    border-color: #1976d2;
+    background: white;
+}
+
+.intern-list {
+    background: white;
+    margin: 0;
+}
+
+.intern-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #f1f3f4;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.intern-row:hover {
+    background-color: #f8f9fa;
+}
+
+.intern-name {
+    font-weight: 500;
+    color: #333;
+    font-size: 0.95rem;
+}
+
+.intern-stats {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.score {
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+}
+
+.score.high {
+    background: #d4edda;
+    color: #155724;
+}
+
+.score.medium {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.score.low {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.issues {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    min-width: 20px;
+    text-align: center;
+}
+
+.issues.none {
+    background: #d4edda;
+    color: #155724;
+}
+
+/* Assignment Details Styles */
+.assignment-details {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    z-index: 1000;
+}
+
+.assignment-header {
+    background: white;
+    border-bottom: 1px solid #e9ecef;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #6c757d;
+    padding: 0.5rem;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+}
+
+.back-btn:hover {
+    background-color: #f8f9fa;
+}
+
+.assignment-title {
+    flex: 1;
+    margin-left: 1rem;
+}
+
+.assignment-title h1 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.assignment-info {
+    display: flex;
+    gap: 2rem;
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.score-highlight {
+    color: #28a745;
+    font-weight: 600;
+}
+
+.issues-highlight {
+    color: #dc3545;
+    font-weight: 600;
+}
+
+.container {
+    display: flex;
+    height: calc(100vh - 120px);
+}
+
+.sidebar {
+    width: 280px;
+    background: white;
+    border-right: 1px solid #e9ecef;
+    overflow-y: auto;
+}
+
+.sidebar-header {
+    padding: 1.5rem 1.5rem 1rem 1.5rem;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.sidebar-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 0.5rem;
+}
+
+.assignment-name {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.file-list {
+    padding: 1rem 0;
+}
+
+.file-item {
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    font-size: 0.9rem;
+    color: #495057;
+    transition: background-color 0.2s;
+}
+
+.file-item:hover {
+    background-color: #f8f9fa;
+}
+
+.file-item.active {
+    background-color: #e3f2fd;
+    color: #1976d2;
+    border-right: 3px solid #1976d2;
+}
+
+.main-content {
+    flex: 1;
+    background: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.tabs {
+    display: flex;
+    border-bottom: 1px solid #e9ecef;
+    padding: 0 2rem;
+}
+
+.tab {
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-size: 0.9rem;
+    color: #6c757d;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+}
+
+.tab:hover {
+    color: #495057;
+}
+
+.tab.active {
+    color: #1976d2;
+    border-bottom-color: #1976d2;
+}
+
+.content {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.test-result {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    padding: 1.5rem;
+}
+
+.test-result.passing {
+    border-color: #28a745;
+    background: #f8fff9;
+}
+
+.test-result.failing {
+    border-color: #dc3545;
+    background: #fff8f8;
+}
+
+.test-name {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #495057;
+}
+
+.test-description {
+    color: #6c757d;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.test-values {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.value-box {
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 1rem;
+}
+
+.value-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #6c757d;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.value-content {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 0.9rem;
+    color: #495057;
+}
+
+.success-message {
+    text-align: center;
+    padding: 3rem;
+    color: #28a745;
+}
+
+.success-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.lint-issue {
+    background: #fff8f8;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.lint-severity {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.severity-error {
+    background: #dc3545;
+    color: white;
+}
+
+.severity-warning {
+    background: #ffc107;
+    color: #212529;
+}
+
+.lint-message {
+    font-size: 0.9rem;
+    color: #495057;
+    margin-bottom: 0.5rem;
+}
+
+.lint-location {
+    font-size: 0.8rem;
+    color: #6c757d;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+}
+
+.code-container {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.code {
+    padding: 1.5rem;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    overflow-x: auto;
+    white-space: pre;
+}

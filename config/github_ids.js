@@ -11,7 +11,6 @@ export const githubIds = [
   "samirangharami",
   "jayanth-14",
   "rahulVishwakarma03",
-  "MavericKhasim",
   "ItsSidhartha",
   "ibrahim-thoughtworks",
   "RashmikaGandra",
@@ -56,4 +55,6 @@ export const githubIds = [
   "PriyanshuA23",
   "HemPradeepthummala",
   "dineshkumar8700",
+  "scriptingmaverick",
+  "dasarikarthik-06",
 ];

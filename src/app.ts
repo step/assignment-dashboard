@@ -7,6 +7,7 @@ import {
   evaluateAssignment,
   getAssignmentEvaluation,
   getAssignments,
+  serveAssignmentScore,
 } from "./handlers/assignment.js";
 import { handleWebhook } from "./handlers/webhook.js";
 
@@ -35,6 +36,10 @@ export const createApp = async () => {
     "/:assignment/scores.html",
     serveStatic({ path: "./public/html/scores.html" }),
   );
+  app.get(
+    "/admin/:assignment",
+    serveStatic({ path: "./public/html/adminPanel.html" }),
+  );
   app.get("/", serveStatic({ path: "./public/html/index.html" }));
   app.get("*", serveStatic({ root: "./public" }));
 
@@ -42,6 +47,11 @@ export const createApp = async () => {
     await store.clear();
     return c.json({ status: "cleared" });
   });
+
+  app.get(
+    "/api/admin/:assignmentId/score",
+    (c) => serveAssignmentScore(c, store),
+  );
 
   return app;
 };

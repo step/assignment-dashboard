@@ -53,3 +53,9 @@ export const evaluateAssignment = async (assignmentId, store) => {
 };
 
 export const getAssignments = (store) => store.getAssignmentStats(assignments);
+
+export const serveAssignmentScore = async (c, store) => {
+  const assignmentId = c.req.param("assignmentId");
+  const scores = await store.getScores(assignmentId);
+  return c.json(scores);
+};

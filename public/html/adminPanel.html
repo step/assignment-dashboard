@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Fundamentals Assignment</title>
+    <link rel="stylesheet" href="../css/adminPanel.css">
+</head>
+
+<body>
+    <!-- Main Intern List View -->
+    <div id="main-view">
+        <div class="header">
+            <h1>React Fundamentals Assignment</h1>
+            <div class="header-stats">
+                <div class="stat">
+                    <div class="stat-value">67</div>
+                    <div class="stat-label">Total Interns</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">89%</div>
+                    <div class="stat-label">Pass Rate</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">2.3</div>
+                    <div class="stat-label">Avg Issues</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">85%</div>
+                    <div class="stat-label">Avg Score</div>
+                </div>
+            </div>
+            <div class="header-info">Last updated: September 20, 2025 at 2:30 PM</div>
+        </div>
+
+        <div class="search-container">
+            <input type="text" class="search-box" placeholder="Search interns..." id="search-input">
+        </div>
+
+        <div class="intern-list" id="intern-list">
+            <!-- Intern rows will be populated here -->
+        </div>
+    </div>
+
+    <!-- Assignment Details View -->
+    <div class="assignment-details" id="assignment-details">
+        <div class="assignment-header">
+            <button class="back-btn" onclick="goBack()">←</button>
+            <div class="assignment-title">
+                <h1 id="intern-details-name">Alice Johnson - React Fundamentals Assignment</h1>
+                <div class="assignment-info">
+                    <span>Score: <span class="score-highlight" id="intern-score">92%</span></span>
+                    <span>Issues: <span class="issues-highlight" id="intern-issues">1</span></span>
+                    <span>Last updated: September 20, 2025 at 2:30 PM</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <div class="sidebar-title">Assignment Files</div>
+                    <div class="assignment-name">react-fundamentals.js</div>
+                </div>
+                <div class="file-list">
+                    <button class="file-item active" onclick="selectFile('component.js')">component.js</button>
+                    <button class="file-item" onclick="selectFile('hooks.js')">hooks.js</button>
+                    <button class="file-item" onclick="selectFile('state.js')">state.js</button>
+                    <button class="file-item" onclick="selectFile('props.js')">props.js</button>
+                    <button class="file-item" onclick="selectFile('events.js')">events.js</button>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <div class="tabs">
+                    <button class="tab active" onclick="selectTab('tests')">Tests</button>
+                    <button class="tab" onclick="selectTab('lint')">Lint Issues</button>
+                    <button class="tab" onclick="selectTab('code')">Code</button>
+                </div>
+
+                <div class="content">
+                    <div id="tests-content">
+                        <div class="test-result failing">
+                            <div class="test-name">Should render component with props</div>
+                            <div class="test-description">Test checks if the component correctly renders with the
+                                provided props and displays the expected output.</div>
+                            <div class="test-values">
+                                <div class="value-box">
+                                    <div class="value-label">Expected</div>
+                                    <div class="value-content">&lt;div className="greeting"&gt;Hello, Alice!&lt;/div&gt;
+                                    </div>
+                                </div>
+                                <div class="value-box">
+                                    <div class="value-label">Actual</div>
+                                    <div class="value-content">&lt;div className="greeting"&gt;Hello, World!&lt;/div&gt;
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="test-result passing">
+                            <div class="test-name">Should handle click events</div>
+                            <div class="test-description">Test verifies that click events are properly handled and state
+                                is updated correctly.</div>
+                            <div style="text-align: center; color: #28a745; font-weight: 600;">✓ Test Passed</div>
+                        </div>
+
+                        <div class="test-result passing">
+                            <div class="test-name">Should update state correctly</div>
+                            <div class="test-description">Test ensures that state updates work as expected and trigger
+                                re-renders.</div>
+                            <div style="text-align: center; color: #28a745; font-weight: 600;">✓ Test Passed</div>
+                        </div>
+                    </div>
+
+                    <div id="lint-content" style="display: none;">
+                        <div class="lint-issue">
+                            <span class="lint-severity severity-error">ERROR</span>
+                            <div class="lint-message">Unused variable 'userName' declared but never used</div>
+                            <div class="lint-location">line 15, column 8</div>
+                        </div>
+                    </div>
+
+                    <div id="code-content" style="display: none;">
+                        <div class="code-container">
+                            <div class="code">import React, { useState } from 'react';
+
+                                const GreetingComponent = ({ name }) => {
+                                const [count, setCount] = useState(0);
+                                const userName = 'Alice'; // This variable is unused
+
+                                const handleClick = () => {
+                                setCount(count + 1);
+                                };
+
+                                return (
+                                &lt;div className="greeting"&gt;
+                                &lt;h1&gt;Hello, World!&lt;/h1&gt;
+                                &lt;p&gt;Count: {count}&lt;/p&gt;
+                                &lt;button onClick={handleClick}&gt;
+                                Click me
+                                &lt;/button&gt;
+                                &lt;/div&gt;
+                                );
+                                };
+
+                                export default GreetingComponent;</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/adminPanel.js"></script>
+</body>
+
+</html>
