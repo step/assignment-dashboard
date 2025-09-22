@@ -1,73 +1,7 @@
 [
   {
-    "name": "compoundInterest",
-    "file": "01_compound_interest.js",
-    "fnName": "compoundInterest",
-    "args": [
-      "p",
-      "t",
-      "r"
-    ],
-    "cases": [
-      {
-        "desc": "Simple case with small values",
-        "inputs": {
-          "p": 1000,
-          "t": 2,
-          "r": 10
-        },
-        "expected": 210.00
-      },
-      {
-        "desc": "Zero time period should return zero interest",
-        "inputs": {
-          "p": 2000,
-          "t": 0,
-          "r": 12
-        },
-        "expected": 0.00
-      },
-      {
-        "desc": "Zero principal amount should return zero interest",
-        "inputs": {
-          "p": 0,
-          "t": 5,
-          "r": 8
-        },
-        "expected": 0.00
-      },
-      {
-        "desc": "Fractional interest rate",
-        "inputs": {
-          "p": 5000,
-          "t": 2,
-          "r": 2.5
-        },
-        "expected": 253.125
-      },
-      {
-        "desc": "Large principal with long duration",
-        "inputs": {
-          "p": 100000,
-          "t": 10,
-          "r": 7
-        },
-        "expected": 96715.1357
-      },
-      {
-        "desc": "Single year compounding",
-        "inputs": {
-          "p": 800,
-          "t": 1,
-          "r": 12
-        },
-        "expected": 96.00
-      }
-    ]
-  },
-  {
     "name": "simpleInterest",
-    "file": "17_simple_interest.js",
+    "file": "01_simple_interest.js",
     "fnName": "simpleInterest",
     "args": [
       "p",
@@ -164,6 +98,1533 @@
           "t": 10
         },
         "expected": 50
+      }
+    ]
+  },
+  {
+    "name": "compoundInterest",
+    "file": "02_compound_interest.js",
+    "fnName": "compoundInterest",
+    "args": [
+      "p",
+      "t",
+      "r"
+    ],
+    "cases": [
+      {
+        "desc": "Simple case with small values",
+        "inputs": {
+          "p": 1000,
+          "t": 2,
+          "r": 10
+        },
+        "expected": 210.00
+      },
+      {
+        "desc": "Zero time period should return zero interest",
+        "inputs": {
+          "p": 2000,
+          "t": 0,
+          "r": 12
+        },
+        "expected": 0.00
+      },
+      {
+        "desc": "Zero principal amount should return zero interest",
+        "inputs": {
+          "p": 0,
+          "t": 5,
+          "r": 8
+        },
+        "expected": 0.00
+      },
+      {
+        "desc": "Fractional interest rate",
+        "inputs": {
+          "p": 5000,
+          "t": 2,
+          "r": 2.5
+        },
+        "expected": 253.125
+      },
+      {
+        "desc": "Large principal with long duration",
+        "inputs": {
+          "p": 100000,
+          "t": 10,
+          "r": 7
+        },
+        "expected": 96715.1357
+      },
+      {
+        "desc": "Single year compounding",
+        "inputs": {
+          "p": 800,
+          "t": 1,
+          "r": 12
+        },
+        "expected": 96.00
+      }
+    ]
+  },
+  {
+    "name": "printEvenNumbers",
+    "file": "03_print_even_numbers.js",
+    "fnName": "printEvenNumbers",
+    "allowMultipleLogs": true,
+    "args": [
+      "startOfTheRange",
+      "endOfTheRange"
+    ],
+    "cases": [
+      {
+        "desc": "Range 1 to 10",
+        "inputs": {
+          "startOfTheRange": 1,
+          "endOfTheRange": 10
+        },
+        "expected": [
+          2,
+          4,
+          6,
+          8,
+          10
+        ]
+      },
+      {
+        "desc": "Range 1 to 5",
+        "inputs": {
+          "startOfTheRange": 1,
+          "endOfTheRange": 5
+        },
+        "expected": [
+          2,
+          4
+        ]
+      },
+      {
+        "desc": "Range 2 to 6",
+        "inputs": {
+          "startOfTheRange": 2,
+          "endOfTheRange": 6
+        },
+        "expected": [
+          2,
+          4,
+          6
+        ]
+      },
+      {
+        "desc": "Range 3 to 3 (no evens)",
+        "inputs": {
+          "startOfTheRange": 3,
+          "endOfTheRange": 3
+        },
+        "expected": []
+      },
+      {
+        "desc": "Range 4 to 4 (single even number)",
+        "inputs": {
+          "startOfTheRange": 4,
+          "endOfTheRange": 4
+        },
+        "expected": [
+          4
+        ]
+      },
+      {
+        "desc": "Range 7 to 11",
+        "inputs": {
+          "startOfTheRange": 7,
+          "endOfTheRange": 11
+        },
+        "expected": [
+          8,
+          10
+        ]
+      },
+      {
+        "desc": "Range 10 to 20",
+        "inputs": {
+          "startOfTheRange": 10,
+          "endOfTheRange": 20
+        },
+        "expected": [
+          10,
+          12,
+          14,
+          16,
+          18,
+          20
+        ]
+      },
+      {
+        "desc": "Range 15 to 15 (odd only)",
+        "inputs": {
+          "startOfTheRange": 15,
+          "endOfTheRange": 15
+        },
+        "expected": []
+      },
+      {
+        "desc": "Range 20 to 25",
+        "inputs": {
+          "startOfTheRange": 20,
+          "endOfTheRange": 25
+        },
+        "expected": [
+          20,
+          22,
+          24
+        ]
+      },
+      {
+        "desc": "Range 50 to 55",
+        "inputs": {
+          "startOfTheRange": 50,
+          "endOfTheRange": 55
+        },
+        "expected": [
+          50,
+          52,
+          54
+        ]
+      }
+    ]
+  },
+  {
+    "name": "decimalToBinary",
+    "file": "04_decimal_to_binary.js",
+    "fnName": "decimalToBinary",
+    "allowMultipleLogs": true,
+    "args": [
+      "a"
+    ],
+    "cases": [
+      {
+        "desc": "Binary representation of 1",
+        "inputs": {
+          "a": 1
+        },
+        "expected": [
+          1
+        ]
+      },
+      {
+        "desc": "Binary representation of 2",
+        "inputs": {
+          "a": 2
+        },
+        "expected": [
+          0,
+          1
+        ]
+      },
+      {
+        "desc": "Binary representation of 3",
+        "inputs": {
+          "a": 3
+        },
+        "expected": [
+          1,
+          1
+        ]
+      },
+      {
+        "desc": "Binary representation of 4",
+        "inputs": {
+          "a": 4
+        },
+        "expected": [
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "desc": "Binary representation of 5",
+        "inputs": {
+          "a": 5
+        },
+        "expected": [
+          1,
+          0,
+          1
+        ]
+      },
+      {
+        "desc": "Binary representation of 6",
+        "inputs": {
+          "a": 6
+        },
+        "expected": [
+          0,
+          1,
+          1
+        ]
+      },
+      {
+        "desc": "Binary representation of 8",
+        "inputs": {
+          "a": 8
+        },
+        "expected": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "desc": "Binary representation of 12",
+        "inputs": {
+          "a": 12
+        },
+        "expected": [
+          0,
+          0,
+          1,
+          1
+        ]
+      },
+      {
+        "desc": "Binary representation of 15",
+        "inputs": {
+          "a": 15
+        },
+        "expected": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "desc": "Binary representation of 16",
+        "inputs": {
+          "a": 16
+        },
+        "expected": [
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "name": "factorial",
+    "file": "05_factorial.js",
+    "fnName": "factorial",
+    "args": [
+      "n"
+    ],
+    "cases": [
+      {
+        "desc": "Factorial of 0",
+        "inputs": {
+          "n": 0
+        },
+        "expected": 1
+      },
+      {
+        "desc": "Factorial of 1",
+        "inputs": {
+          "n": 1
+        },
+        "expected": 1
+      },
+      {
+        "desc": "Factorial of 2",
+        "inputs": {
+          "n": 2
+        },
+        "expected": 2
+      },
+      {
+        "desc": "Factorial of 3",
+        "inputs": {
+          "n": 3
+        },
+        "expected": 6
+      },
+      {
+        "desc": "Factorial of 4",
+        "inputs": {
+          "n": 4
+        },
+        "expected": 24
+      },
+      {
+        "desc": "Factorial of 5",
+        "inputs": {
+          "n": 5
+        },
+        "expected": 120
+      },
+      {
+        "desc": "Factorial of 6",
+        "inputs": {
+          "n": 6
+        },
+        "expected": 720
+      },
+      {
+        "desc": "Factorial of 7",
+        "inputs": {
+          "n": 7
+        },
+        "expected": 5040
+      },
+      {
+        "desc": "Factorial of 8",
+        "inputs": {
+          "n": 8
+        },
+        "expected": 40320
+      },
+      {
+        "desc": "Factorial of 10",
+        "inputs": {
+          "n": 10
+        },
+        "expected": 3628800
+      }
+    ]
+  },
+  {
+    "name": "nthFibonacciTerm",
+    "file": "06_nth_fibonacci_term.js",
+    "fnName": "nthFibonacciTerm",
+    "args": [
+      "n"
+    ],
+    "cases": [
+      {
+        "desc": "0th Fibonacci term",
+        "inputs": {
+          "n": 1
+        },
+        "expected": 0
+      },
+      {
+        "desc": "1st Fibonacci term",
+        "inputs": {
+          "n": 2
+        },
+        "expected": 1
+      },
+      {
+        "desc": "2nd Fibonacci term",
+        "inputs": {
+          "n": 3
+        },
+        "expected": 1
+      },
+      {
+        "desc": "3rd Fibonacci term",
+        "inputs": {
+          "n": 4
+        },
+        "expected": 2
+      },
+      {
+        "desc": "4th Fibonacci term",
+        "inputs": {
+          "n": 5
+        },
+        "expected": 3
+      },
+      {
+        "desc": "5th Fibonacci term",
+        "inputs": {
+          "n": 6
+        },
+        "expected": 5
+      },
+      {
+        "desc": "6th Fibonacci term",
+        "inputs": {
+          "n": 7
+        },
+        "expected": 8
+      },
+      {
+        "desc": "7th Fibonacci term",
+        "inputs": {
+          "n": 8
+        },
+        "expected": 13
+      },
+      {
+        "desc": "10th Fibonacci term",
+        "inputs": {
+          "n": 11
+        },
+        "expected": 55
+      },
+      {
+        "desc": "15th Fibonacci term",
+        "inputs": {
+          "n": 16
+        },
+        "expected": 610
+      }
+    ]
+  },
+  {
+    "name": "fibonacciSeries",
+    "file": "07_fibonacci_series.js",
+    "fnName": "fibonacciSeries",
+    "allowMultipleLogs": true,
+    "args": [
+      "n"
+    ],
+    "cases": [
+      {
+        "desc": "First 1 Fibonacci term",
+        "inputs": {
+          "n": 1
+        },
+        "expected": [
+          0
+        ]
+      },
+      {
+        "desc": "First 2 Fibonacci terms",
+        "inputs": {
+          "n": 2
+        },
+        "expected": [
+          0,
+          1
+        ]
+      },
+      {
+        "desc": "First 3 Fibonacci terms",
+        "inputs": {
+          "n": 3
+        },
+        "expected": [
+          0,
+          1,
+          1
+        ]
+      },
+      {
+        "desc": "First 4 Fibonacci terms",
+        "inputs": {
+          "n": 4
+        },
+        "expected": [
+          0,
+          1,
+          1,
+          2
+        ]
+      },
+      {
+        "desc": "First 5 Fibonacci terms",
+        "inputs": {
+          "n": 5
+        },
+        "expected": [
+          0,
+          1,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "desc": "First 6 Fibonacci terms",
+        "inputs": {
+          "n": 6
+        },
+        "expected": [
+          0,
+          1,
+          1,
+          2,
+          3,
+          5
+        ]
+      },
+      {
+        "desc": "First 12 Fibonacci terms",
+        "inputs": {
+          "n": 12
+        },
+        "expected": [
+          0,
+          1,
+          1,
+          2,
+          3,
+          5,
+          8,
+          13,
+          21,
+          34,
+          55,
+          89
+        ]
+      }
+    ]
+  },
+  {
+    "name": "isPrime",
+    "file": "08_is_prime.js",
+    "fnName": "isPrime",
+    "args": [
+      "a"
+    ],
+    "cases": [
+      {
+        "desc": "Smallest prime number",
+        "inputs": {
+          "a": 2
+        },
+        "expected": true
+      },
+      {
+        "desc": "Smallest odd prime number",
+        "inputs": {
+          "a": 3
+        },
+        "expected": true
+      },
+      {
+        "desc": "Non-prime even number",
+        "inputs": {
+          "a": 4
+        },
+        "expected": false
+      },
+      {
+        "desc": "Non-prime odd number",
+        "inputs": {
+          "a": 9
+        },
+        "expected": false
+      },
+      {
+        "desc": "Large non-prime number 100",
+        "inputs": {
+          "a": 100
+        },
+        "expected": false
+      },
+      {
+        "desc": "Large prime number 101",
+        "inputs": {
+          "a": 101
+        },
+        "expected": true
+      }
+    ]
+  },
+  {
+    "name": "findAllPrimes",
+    "file": "09_find_all_primes.js",
+    "fnName": "findAllPrimes",
+    "allowMultipleLogs": true,
+    "args": [
+      "startOfRange",
+      "endOfRange"
+    ],
+    "cases": [
+      {
+        "desc": "Primes between 1 and 10",
+        "inputs": {
+          "startOfRange": 1,
+          "endOfRange": 10
+        },
+        "expected": [
+          2,
+          3,
+          5,
+          7
+        ]
+      },
+      {
+        "desc": "Primes between 1 and 5",
+        "inputs": {
+          "startOfRange": 1,
+          "endOfRange": 5
+        },
+        "expected": [
+          2,
+          3,
+          5
+        ]
+      },
+      {
+        "desc": "Primes between 10 and 20",
+        "inputs": {
+          "startOfRange": 10,
+          "endOfRange": 20
+        },
+        "expected": [
+          11,
+          13,
+          17,
+          19
+        ]
+      },
+      {
+        "desc": "Primes between 20 and 30",
+        "inputs": {
+          "startOfRange": 20,
+          "endOfRange": 30
+        },
+        "expected": [
+          23,
+          29
+        ]
+      },
+      {
+        "desc": "Primes between 30 and 40",
+        "inputs": {
+          "startOfRange": 30,
+          "endOfRange": 40
+        },
+        "expected": [
+          31,
+          37
+        ]
+      },
+      {
+        "desc": "Primes between 1 and 2 (edge case)",
+        "inputs": {
+          "startOfRange": 1,
+          "endOfRange": 2
+        },
+        "expected": [
+          2
+        ]
+      },
+      {
+        "desc": "Primes between 14 and 16 (no primes)",
+        "inputs": {
+          "startOfRange": 14,
+          "endOfRange": 16
+        },
+        "expected": []
+      },
+      {
+        "desc": "Primes between 50 and 60",
+        "inputs": {
+          "startOfRange": 50,
+          "endOfRange": 60
+        },
+        "expected": [
+          53,
+          59
+        ]
+      }
+    ]
+  },
+  {
+    "name": "firstPrimeAbove",
+    "file": "10_first_prime_above.js",
+    "fnName": "firstPrimeAbove",
+    "args": [
+      "a"
+    ],
+    "cases": [
+      {
+        "desc": "First prime above 1",
+        "inputs": {
+          "a": 1
+        },
+        "expected": 2
+      },
+      {
+        "desc": "First prime above 2",
+        "inputs": {
+          "a": 2
+        },
+        "expected": 3
+      },
+      {
+        "desc": "First prime above 3",
+        "inputs": {
+          "a": 3
+        },
+        "expected": 5
+      },
+      {
+        "desc": "First prime above 10",
+        "inputs": {
+          "a": 10
+        },
+        "expected": 11
+      },
+      {
+        "desc": "First prime above 13",
+        "inputs": {
+          "a": 13
+        },
+        "expected": 17
+      },
+      {
+        "desc": "First prime above 20",
+        "inputs": {
+          "a": 20
+        },
+        "expected": 23
+      },
+      {
+        "desc": "First prime above 29",
+        "inputs": {
+          "a": 29
+        },
+        "expected": 31
+      },
+      {
+        "desc": "First prime above 50",
+        "inputs": {
+          "a": 50
+        },
+        "expected": 53
+      },
+      {
+        "desc": "First prime above 97 (largest two-digit prime)",
+        "inputs": {
+          "a": 97
+        },
+        "expected": 101
+      },
+      {
+        "desc": "First prime above 100",
+        "inputs": {
+          "a": 100
+        },
+        "expected": 101
+      }
+    ]
+  },
+  {
+    "name": "hcf",
+    "file": "11_hcf.js",
+    "fnName": "hcf",
+    "args": [
+      "a",
+      "b"
+    ],
+    "cases": [
+      {
+        "desc": "HCF of 1 and 1",
+        "inputs": {
+          "a": 1,
+          "b": 1
+        },
+        "expected": 1
+      },
+      {
+        "desc": "HCF of 1 and 5",
+        "inputs": {
+          "a": 1,
+          "b": 5
+        },
+        "expected": 1
+      },
+      {
+        "desc": "HCF of 5 and 10",
+        "inputs": {
+          "a": 5,
+          "b": 10
+        },
+        "expected": 5
+      },
+      {
+        "desc": "HCF of 12 and 18",
+        "inputs": {
+          "a": 12,
+          "b": 18
+        },
+        "expected": 6
+      },
+      {
+        "desc": "HCF of 7 and 13 (both primes)",
+        "inputs": {
+          "a": 7,
+          "b": 13
+        },
+        "expected": 1
+      },
+      {
+        "desc": "HCF of 15 and 25",
+        "inputs": {
+          "a": 15,
+          "b": 25
+        },
+        "expected": 5
+      },
+      {
+        "desc": "HCF of 21 and 28",
+        "inputs": {
+          "a": 21,
+          "b": 28
+        },
+        "expected": 7
+      },
+      {
+        "desc": "HCF of 100 and 80",
+        "inputs": {
+          "a": 100,
+          "b": 80
+        },
+        "expected": 20
+      },
+      {
+        "desc": "HCF of 81 and 153",
+        "inputs": {
+          "a": 81,
+          "b": 153
+        },
+        "expected": 9
+      },
+      {
+        "desc": "HCF of 101 and 103 (consecutive primes)",
+        "inputs": {
+          "a": 101,
+          "b": 103
+        },
+        "expected": 1
+      }
+    ]
+  },
+  {
+    "name": "lcm",
+    "file": "12_lcm.js",
+    "fnName": "lcm",
+    "args": [
+      "a",
+      "b"
+    ],
+    "cases": [
+      {
+        "desc": "LCM of two equal numbers",
+        "inputs": {
+          "a": 5,
+          "b": 5
+        },
+        "expected": 5
+      },
+      {
+        "desc": "LCM of 2 and 3 (coprime numbers)",
+        "inputs": {
+          "a": 2,
+          "b": 3
+        },
+        "expected": 6
+      },
+      {
+        "desc": "LCM of 4 and 6",
+        "inputs": {
+          "a": 4,
+          "b": 6
+        },
+        "expected": 12
+      },
+      {
+        "desc": "LCM of 7 and 13 (both primes)",
+        "inputs": {
+          "a": 7,
+          "b": 13
+        },
+        "expected": 91
+      },
+      {
+        "desc": "LCM of 8 and 12",
+        "inputs": {
+          "a": 8,
+          "b": 12
+        },
+        "expected": 24
+      },
+      {
+        "desc": "LCM of 9 and 6",
+        "inputs": {
+          "a": 9,
+          "b": 6
+        },
+        "expected": 18
+      },
+      {
+        "desc": "LCM of 10 and 15",
+        "inputs": {
+          "a": 10,
+          "b": 15
+        },
+        "expected": 30
+      },
+      {
+        "desc": "LCM of 21 and 6",
+        "inputs": {
+          "a": 21,
+          "b": 6
+        },
+        "expected": 42
+      },
+      {
+        "desc": "LCM of 100 and 80",
+        "inputs": {
+          "a": 100,
+          "b": 80
+        },
+        "expected": 400
+      },
+      {
+        "desc": "LCM of 101 and 103 (coprime large primes)",
+        "inputs": {
+          "a": 101,
+          "b": 103
+        },
+        "expected": 10403
+      }
+    ]
+  },
+  {
+    "name": "isArmstrong",
+    "file": "13_is_armstrong.js",
+    "fnName": "isArmstrong",
+    "args": [
+      "a"
+    ],
+    "cases": [
+      {
+        "desc": "Armstrong check for 0 (edge case, 0^3 = 0)",
+        "inputs": {
+          "a": 0
+        },
+        "expected": true
+      },
+      {
+        "desc": "Armstrong check for 1 (edge case, 1^3 = 1)",
+        "inputs": {
+          "a": 1
+        },
+        "expected": true
+      },
+      {
+        "desc": "Armstrong check for 153 (classic Armstrong number)",
+        "inputs": {
+          "a": 153
+        },
+        "expected": true
+      },
+      {
+        "desc": "Armstrong check for 370",
+        "inputs": {
+          "a": 370
+        },
+        "expected": true
+      },
+      {
+        "desc": "Armstrong check for 371",
+        "inputs": {
+          "a": 371
+        },
+        "expected": true
+      },
+      {
+        "desc": "Armstrong check for 407",
+        "inputs": {
+          "a": 407
+        },
+        "expected": true
+      },
+      {
+        "desc": "Armstrong check for 100 (not Armstrong)",
+        "inputs": {
+          "a": 100
+        },
+        "expected": false
+      },
+      {
+        "desc": "Armstrong check for 200 (not Armstrong)",
+        "inputs": {
+          "a": 200
+        },
+        "expected": false
+      },
+      {
+        "desc": "Armstrong check for 9474 (4-digit Armstrong number, 9^4+4^4+7^4+4^4)",
+        "inputs": {
+          "a": 9474
+        },
+        "expected": true
+      },
+      {
+        "desc": "Armstrong check for 9475 (just above 9474, not Armstrong)",
+        "inputs": {
+          "a": 9475
+        },
+        "expected": false
+      }
+    ]
+  },
+  {
+    "name": "isPalindrome",
+    "file": "14_is_palindrome.js",
+    "fnName": "isPalindrome",
+    "args": [
+      "a"
+    ],
+    "cases": [
+      {
+        "desc": "Single digit number (always palindrome)",
+        "inputs": {
+          "a": 7
+        },
+        "expected": true
+      },
+      {
+        "desc": "Two-digit palindrome",
+        "inputs": {
+          "a": 22
+        },
+        "expected": true
+      },
+      {
+        "desc": "Two-digit non-palindrome",
+        "inputs": {
+          "a": 23
+        },
+        "expected": false
+      },
+      {
+        "desc": "Three-digit palindrome",
+        "inputs": {
+          "a": 121
+        },
+        "expected": true
+      },
+      {
+        "desc": "Three-digit non-palindrome",
+        "inputs": {
+          "a": 123
+        },
+        "expected": false
+      },
+      {
+        "desc": "Even-length palindrome",
+        "inputs": {
+          "a": 1221
+        },
+        "expected": true
+      },
+      {
+        "desc": "Even-length non-palindrome",
+        "inputs": {
+          "a": 1234
+        },
+        "expected": false
+      },
+      {
+        "desc": "Five-digit palindrome",
+        "inputs": {
+          "a": 12321
+        },
+        "expected": true
+      },
+      {
+        "desc": "Five-digit non-palindrome",
+        "inputs": {
+          "a": 12345
+        },
+        "expected": false
+      },
+      {
+        "desc": "Large palindrome number",
+        "inputs": {
+          "a": 987789
+        },
+        "expected": true
+      }
+    ]
+  },
+  {
+    "name": "isLeapYear",
+    "file": "15_leap_year.js",
+    "fnName": "isLeapYear",
+    "args": [
+      "year"
+    ],
+    "cases": [
+      {
+        "desc": "Year 2000 (divisible by 400 → leap year)",
+        "inputs": {
+          "year": 2000
+        },
+        "expected": true
+      },
+      {
+        "desc": "Year 1900 (divisible by 100 but not 400 → not leap year)",
+        "inputs": {
+          "year": 1900
+        },
+        "expected": false
+      },
+      {
+        "desc": "Year 1996 (divisible by 4 but not 100 → leap year)",
+        "inputs": {
+          "year": 1996
+        },
+        "expected": true
+      },
+      {
+        "desc": "Year 1999 (not divisible by 4 → not leap year)",
+        "inputs": {
+          "year": 1999
+        },
+        "expected": false
+      },
+      {
+        "desc": "Year 2004 (divisible by 4 → leap year)",
+        "inputs": {
+          "year": 2004
+        },
+        "expected": true
+      },
+      {
+        "desc": "Year 2100 (divisible by 100 but not 400 → not leap year)",
+        "inputs": {
+          "year": 2100
+        },
+        "expected": false
+      },
+      {
+        "desc": "Year 2400 (divisible by 400 → leap year)",
+        "inputs": {
+          "year": 2400
+        },
+        "expected": true
+      },
+      {
+        "desc": "Year 1 (not divisible by 4 → not leap year)",
+        "inputs": {
+          "year": 1
+        },
+        "expected": false
+      },
+      {
+        "desc": "Year 4 (smallest leap year divisible by 4)",
+        "inputs": {
+          "year": 4
+        },
+        "expected": true
+      },
+      {
+        "desc": "Year 100 (divisible by 100 but not 400 → not leap year)",
+        "inputs": {
+          "year": 100
+        },
+        "expected": false
+      }
+    ]
+  },
+  {
+    "name": "primeFactors",
+    "file": "16_prime_factors.js",
+    "fnName": "primeFactors",
+    "allowMultipleLogs": true,
+    "args": [
+      "a"
+    ],
+    "cases": [
+      {
+        "desc": "Prime factors of 2 (prime itself)",
+        "inputs": {
+          "a": 2
+        },
+        "expected": [
+          2
+        ]
+      },
+      {
+        "desc": "Prime factors of 12",
+        "inputs": {
+          "a": 12
+        },
+        "expected": [
+          2,
+          2,
+          3
+        ]
+      },
+      {
+        "desc": "Prime factors of 18",
+        "inputs": {
+          "a": 18
+        },
+        "expected": [
+          2,
+          3,
+          3
+        ]
+      },
+      {
+        "desc": "Prime factors of 28",
+        "inputs": {
+          "a": 28
+        },
+        "expected": [
+          2,
+          2,
+          7
+        ]
+      },
+      {
+        "desc": "Prime factors of 29 (prime number)",
+        "inputs": {
+          "a": 29
+        },
+        "expected": [
+          29
+        ]
+      },
+      {
+        "desc": "Prime factors of 36",
+        "inputs": {
+          "a": 36
+        },
+        "expected": [
+          2,
+          2,
+          3,
+          3
+        ]
+      },
+      {
+        "desc": "Prime factors of 49 (perfect square of prime)",
+        "inputs": {
+          "a": 49
+        },
+        "expected": [
+          7,
+          7
+        ]
+      },
+      {
+        "desc": "Prime factors of 60",
+        "inputs": {
+          "a": 60
+        },
+        "expected": [
+          2,
+          2,
+          3,
+          5
+        ]
+      },
+      {
+        "desc": "Prime factors of 97 (prime number)",
+        "inputs": {
+          "a": 97
+        },
+        "expected": [
+          97
+        ]
+      },
+      {
+        "desc": "Prime factors of 100",
+        "inputs": {
+          "a": 100
+        },
+        "expected": [
+          2,
+          2,
+          5,
+          5
+        ]
+      }
+    ]
+  },
+  {
+    "name": "squareRoot",
+    "file": "17_square_root.js",
+    "fnName": "squareRoot",
+    "args": [
+      "a"
+    ],
+    "cases": [
+      {
+        "desc": "Square root of 1",
+        "inputs": {
+          "a": 1
+        },
+        "expected": 1
+      },
+      {
+        "desc": "Square root of 4 (perfect square)",
+        "inputs": {
+          "a": 4
+        },
+        "expected": 2
+      },
+      {
+        "desc": "Square root of 9 (perfect square)",
+        "inputs": {
+          "a": 9
+        },
+        "expected": 3
+      },
+      {
+        "desc": "Square root of 16 (perfect square)",
+        "inputs": {
+          "a": 16
+        },
+        "expected": 4
+      },
+      {
+        "desc": "Square root of 25 (perfect square)",
+        "inputs": {
+          "a": 25
+        },
+        "expected": 5
+      },
+      {
+        "desc": "Square root of 2 (non-perfect square)",
+        "inputs": {
+          "a": 2
+        },
+        "expected": 1.414
+      },
+      {
+        "desc": "Square root of 3 (non-perfect square)",
+        "inputs": {
+          "a": 3
+        },
+        "expected": 1.732
+      },
+      {
+        "desc": "Square root of 5 (non-perfect square)",
+        "inputs": {
+          "a": 5
+        },
+        "expected": 2.236
+      },
+      {
+        "desc": "Square root of 50 (non-perfect square)",
+        "inputs": {
+          "a": 50
+        },
+        "expected": 7.071
+      },
+      {
+        "desc": "Square root of 100 (perfect square)",
+        "inputs": {
+          "a": 100
+        },
+        "expected": 10
+      }
+    ]
+  },
+  {
+    "name": "sumOfAP",
+    "file": "18_sum_of_ap.js",
+    "fnName": "sumOfAP",
+    "args": [
+      "a",
+      "d",
+      "n"
+    ],
+    "cases": [
+      {
+        "desc": "AP with a=2, d=3, n=5",
+        "inputs": {
+          "a": 2,
+          "d": 3,
+          "n": 5
+        },
+        "expected": 40
+      },
+      {
+        "desc": "AP with a=1, d=1, n=5 (natural numbers 1–5)",
+        "inputs": {
+          "a": 1,
+          "d": 1,
+          "n": 5
+        },
+        "expected": 15
+      },
+      {
+        "desc": "AP with a=5, d=0, n=4 (constant sequence)",
+        "inputs": {
+          "a": 5,
+          "d": 0,
+          "n": 4
+        },
+        "expected": 20
+      },
+      {
+        "desc": "AP with a=3, d=2, n=4",
+        "inputs": {
+          "a": 3,
+          "d": 2,
+          "n": 4
+        },
+        "expected": 24
+      },
+      {
+        "desc": "AP with a=10, d=10, n=3",
+        "inputs": {
+          "a": 10,
+          "d": 10,
+          "n": 3
+        },
+        "expected": 60
+      },
+      {
+        "desc": "AP with a=1, d=2, n=10 (sum of first 10 odd numbers)",
+        "inputs": {
+          "a": 1,
+          "d": 2,
+          "n": 10
+        },
+        "expected": 100
+      },
+      {
+        "desc": "AP with a=2, d=2, n=10 (sum of first 10 even numbers)",
+        "inputs": {
+          "a": 2,
+          "d": 2,
+          "n": 10
+        },
+        "expected": 110
+      },
+      {
+        "desc": "AP with a=7, d=3, n=1 (only one term)",
+        "inputs": {
+          "a": 7,
+          "d": 3,
+          "n": 1
+        },
+        "expected": 7
+      },
+      {
+        "desc": "AP with a=0, d=5, n=5 (starting from 0)",
+        "inputs": {
+          "a": 0,
+          "d": 5,
+          "n": 5
+        },
+        "expected": 50
+      },
+      {
+        "desc": "AP with a=100, d=100, n=2 (large terms small count)",
+        "inputs": {
+          "a": 100,
+          "d": 100,
+          "n": 2
+        },
+        "expected": 300
       }
     ]
   }
