@@ -4,8 +4,8 @@ import { testAssignment } from "../../js/main.js";
 const calculateStats = (scores) => {
   const totalInterns = scores.length;
   const passRate =
-    (scores.filter((intern) => intern.score >= 30).length / totalInterns) * 100;
-  console.log("Pass Rate:", passRate);
+    (scores.filter((intern) => intern.summary.percentage >= 30).length / totalInterns) * 100;
+
   const avgIssues =
     scores.reduce((sum, intern) => sum + intern.summary.lintErrors, 0) /
     totalInterns;
