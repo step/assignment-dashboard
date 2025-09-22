@@ -4,7 +4,8 @@ import { testAssignment } from "../../js/main.js";
 const calculateStats = (scores) => {
   const totalInterns = scores.length;
   const passRate =
-    (scores.filter((intern) => intern.score >= 70).length / totalInterns) * 100;
+    (scores.filter((intern) => intern.score >= 30).length / totalInterns) * 100;
+  console.log("Pass Rate:", passRate);
   const avgIssues =
     scores.reduce((sum, intern) => sum + intern.summary.lintErrors, 0) /
     totalInterns;
@@ -57,5 +58,6 @@ export const serveAssignmentScore = async (c, store) => {
   const assignmentId = c.req.param("assignmentId");
   console.log(`Serving scores for assignment: ${assignmentId}`);
   const scores = await store.getScores(assignmentId);
+  console.log(scores);
   return c.json(scores);
 };
