@@ -253,18 +253,18 @@ function formatTestValue(value) {
   if (value === null || value === undefined) {
     return "N/A";
   }
-  
+
   if (Array.isArray(value)) {
     if (value.length === 0) {
       return "[] (empty array)";
     }
     return value.join("\n");
   }
-  
+
   if (typeof value === "object") {
     return JSON.stringify(value, null, 2);
   }
-  
+
   return String(value);
 }
 

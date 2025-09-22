@@ -99,6 +99,11 @@ const getHygieneClass = (issues) => {
   return "hygiene-high";
 };
 
+// Function to sort interns by score (highest first)
+const sortInternsByScore = (interns) => {
+  return [...interns].sort((a, b) => b.score - a.score);
+};
+
 const renderStats = (stats) => {
   const statsGrid = document.getElementById("statsGrid");
   const template = document.getElementById("statCardTemplate");
@@ -135,7 +140,10 @@ const renderInterns = (data) => {
   // Clear existing content
   internList.replaceChildren();
 
-  data.forEach((intern) => {
+  // Sort data by score (highest first) before rendering
+  const sortedData = sortInternsByScore(data);
+
+  sortedData.forEach((intern) => {
     // Clone the template content
     const clone = template.content.cloneNode(true);
 
