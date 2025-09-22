@@ -114,7 +114,10 @@ function renderInternList() {
   const internList = document.getElementById("intern-list");
   internList.innerHTML = "";
 
-  internsData.forEach((intern) => {
+  // Sort interns by score in descending order
+  const sortedInterns = [...internsData].sort((a, b) => b.score - a.score);
+
+  sortedInterns.forEach((intern) => {
     const row = document.createElement("div");
     row.className = "intern-row";
     row.onclick = () => openInternDetails(intern);
