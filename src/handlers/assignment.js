@@ -41,7 +41,6 @@ export const evaluateAssignment = async (assignmentId, store) => {
   console.log("*".repeat(10), `${assignmentId} evaluation started`);
   const date = new Date();
   const scores = await testAssignment(assignmentId);
-  console.log(scores);
   console.log("*".repeat(10), `${assignmentId} evaluation completed`);
 
   await store.addStats(assignmentId, {
@@ -56,6 +55,7 @@ export const getAssignments = (store) => store.getAssignmentStats(assignments);
 
 export const serveAssignmentScore = async (c, store) => {
   const assignmentId = c.req.param("assignmentId");
+  console.log(`Serving scores for assignment: ${assignmentId}`);
   const scores = await store.getScores(assignmentId);
   return c.json(scores);
 };
