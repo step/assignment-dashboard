@@ -1,4 +1,4 @@
-import { eslintConfig } from "../config/eslint.js";
+import eslintConfig from "../config/eslint.js";
 import { githubIds } from "../config/github_ids.js";
 import BatchWorker from "./batchWorker.js";
 

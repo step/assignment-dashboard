@@ -35,14 +35,34 @@ const startBatchWorker = () => {
 
 startBatchWorker();
 
-const lintCode = (linter, code, lintConfig) => {
-  return linter.verify(code, lintConfig);
+const SOCMarker = "// START YOUR CODE AFTER THIS LINE. DO NOT REMOVE THIS LINE";
+
+const lintCode = async (linter, code) => {
+  const [setup, solution] = code.split(SOCMarker);
+  const codeToLint = `
+/* eslint-disable */
+${setup}
+${SOCMarker}
+/* eslint-enable */
+${solution}
+`;
+  const result = await linter.lintText(codeToLint);
+  return result.map((r) => r.messages)
+    .flat()
+    .map((issue) => ({
+      ruleId: issue.ruleId,
+      message: issue.message,
+      line: issue.line,
+      column: issue.column,
+    }));
 };
 
 const createJobs = async (blobURL, tests, lintConfig) => {
   const blob = await fetchBlob(blobURL);
   const zip = await unzipBlob(blob);
-  const linter = new eslint.Linter();
+  const linter = new eslint.ESLint({
+    overrideConfigFile: "./config/eslint.js",
+  });
   return await Promise.all(
     tests.map(
       async (
@@ -57,7 +77,7 @@ const createJobs = async (blobURL, tests, lintConfig) => {
         },
       ) => {
         const code = await readFile(zip, file);
-        const lintIssues = lintCode(linter, code, lintConfig);
+        const lintIssues = await lintCode(linter, code, lintConfig);
         return {
           name,
           cases,
@@ -90,7 +110,7 @@ self.addEventListener("message", async (event) => {
       name: githubId,
       error: e.message,
       summary: { total: 0, passed: 0, failed: 0, lintErrors: 0, percentage: 0 },
-      results: []
+      results: [],
     });
   }
 });

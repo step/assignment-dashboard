@@ -1,4 +1,4 @@
-export const eslintConfig = {
+const eslintConfig = {
   "rules": {
     "indent": ["error", 2, { "SwitchCase": 1 }],
     "max-lines-per-function": ["error", 15],
@@ -40,3 +40,5 @@ export const eslintConfig = {
     "keyword-spacing": "error",
   },
 };
+
+export default eslintConfig;
