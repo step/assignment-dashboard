@@ -104,6 +104,43 @@ const sortInternsByScore = (interns) => {
   return [...interns].sort((a, b) => b.score - a.score);
 };
 
+// Function to convert scores data to markdown table
+const scoresToMarkdownTable = (scores) => {
+  if (!scores || scores.length === 0) {
+    return "No scores data available.";
+  }
+
+  // Sort scores by score (highest first)
+  const sortedScores = sortInternsByScore(scores);
+
+  let markdown = "| Intern | Score | Issues |\n";
+  markdown += "|--------|-------|--------|\n";
+
+  sortedScores.forEach((intern) => {
+    markdown += `| ${intern.name} | ${intern.score}% | ${intern.issues} |\n`;
+  });
+
+  return markdown;
+};
+
+// Function to copy scores as markdown table
+const copyScoresAsMarkdown = async () => {
+  try {
+    if (!assignmentResult || !assignmentResult.scores) {
+      alert("No scores data available to copy.");
+      return;
+    }
+
+    const markdownTable = scoresToMarkdownTable(assignmentResult.scores);
+
+    await navigator.clipboard.writeText(markdownTable);
+    alert("Scores copied as markdown table to clipboard!");
+  } catch (error) {
+    console.error("Failed to copy scores:", error);
+    alert("Failed to copy scores to clipboard. Please try again.");
+  }
+};
+
 const renderStats = (stats) => {
   const statsGrid = document.getElementById("statsGrid");
   const template = document.getElementById("statCardTemplate");
@@ -190,6 +227,12 @@ const initializeApp = async () => {
     updateLastUpdated(assignmentResult.stats);
     renderStats(assignmentResult.stats);
     renderInterns(assignmentResult.scores);
+
+    // Add event listener for copy markdown button
+    const copyButton = document.getElementById("copyMarkdownScores");
+    if (copyButton) {
+      copyButton.addEventListener("click", copyScoresAsMarkdown);
+    }
   } catch (_error) {
     hideLoading();
     showError("Failed to load assignment results. Please try again later.");

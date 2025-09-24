@@ -130,6 +130,29 @@ body {
     font-weight: 600;
     font-size: 14px;
     color: #495057;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.copy-markdown-btn {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.copy-markdown-btn:hover {
+    background: #0056b3;
+}
+
+.copy-markdown-btn:active {
+    background: #004085;
 }
 
 .intern-list {
