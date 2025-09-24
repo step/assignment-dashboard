@@ -50,7 +50,7 @@ ${solution}`;
     .map((issue) => ({
       ruleId: issue.ruleId,
       message: issue.message,
-      line: issue.line,
+      line: issue.line - 3,
       column: issue.column,
     }));
 };
