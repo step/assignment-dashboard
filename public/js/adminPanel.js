@@ -308,8 +308,18 @@ function updateTestsContent() {
     return;
   }
 
+  // Sort tests to show failing tests first
+  const sortedTests = [...fileResult.tests].sort((a, b) => {
+    // If one test passes and the other fails, show failing first
+    if (a.pass !== b.pass) {
+      return a.pass ? 1 : -1; // false (failing) comes before true (passing)
+    }
+    // If both have same pass status, maintain original order
+    return 0;
+  });
+
   let testsHtml = "";
-  fileResult.tests.forEach((test) => {
+  sortedTests.forEach((test) => {
     const testClass = test.pass ? "passing" : "failing";
 
     if (test.pass) {
