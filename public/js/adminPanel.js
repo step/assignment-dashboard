@@ -436,6 +436,260 @@ function updateCodeContent() {
   }
 }
 
+// Generate comprehensive markdown report
+function generateMarkdownReport() {
+  if (!internsData || internsData.length === 0) {
+    alert("No data available to generate report");
+    return;
+  }
+
+  const assignmentTitle = formatAssignmentTitle(assignmentId);
+  const reportDate = new Date().toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+  // Calculate overall statistics
+  const totalInterns = internsData.length;
+  const passedInterns =
+    internsData.filter((intern) => intern.score >= 60).length;
+  const passRate = Math.round((passedInterns / totalInterns) * 100);
+  const avgScore = Math.round(
+    internsData.reduce((sum, intern) => sum + intern.score, 0) / totalInterns,
+  );
+
+  // Calculate total failing tests and lint issues
+  const totalFailingTests = internsData.reduce(
+    (sum, intern) => sum + intern.failed,
+    0,
+  );
+  const totalLintIssues = internsData.reduce(
+    (sum, intern) => sum + intern.issues,
+    0,
+  );
+
+  let markdown = `# ${assignmentTitle} - Assessment Report\n\n`;
+  markdown += `**Generated on:** ${reportDate}\n\n`;
+
+  // Overall Summary
+  markdown += `## 📊 Overall Summary\n\n`;
+  markdown += `| Metric | Value |\n`;
+  markdown += `|--------|-------|\n`;
+  markdown += `| Total Interns | ${totalInterns} |\n`;
+  markdown += `| Pass Rate | ${passRate}% |\n`;
+  markdown += `| Average Score | ${avgScore}% |\n`;
+  markdown += `| Total Failing Tests | ${totalFailingTests} |\n`;
+  markdown += `| Total Lint Issues | ${totalLintIssues} |\n\n`;
+
+  // Individual Intern Scores
+  markdown += `## 👥 Individual Intern Performance\n\n`;
+  markdown +=
+    `| Rank | Intern Name | Score | Tests Passed | Tests Failed | Lint Issues |\n`;
+  markdown +=
+    `|------|-------------|-------|--------------|--------------|-------------|\n`;
+
+  const sortedInterns = [...internsData].sort((a, b) => b.score - a.score);
+  sortedInterns.forEach((intern, index) => {
+    markdown += `| ${
+      index + 1
+    } | ${intern.name} | ${intern.score}% | ${intern.passed} | ${intern.failed} | ${intern.issues} |\n`;
+  });
+
+  markdown += `\n`;
+
+  // Detailed Lint Issues Section
+  markdown += `## 🔍 Detailed Lint Issues\n\n`;
+
+  let hasLintIssues = false;
+
+  sortedInterns.forEach((intern) => {
+    if (!intern.results || intern.results.length === 0) return;
+
+    // Check if this intern has any lint issues
+    const internHasIssues = intern.results.some((result) =>
+      result.lintIssues && result.lintIssues.length > 0
+    );
+
+    if (internHasIssues) {
+      hasLintIssues = true;
+      markdown += `### ${intern.name}\n\n`;
+
+      intern.results.forEach((result) => {
+        if (result.lintIssues && result.lintIssues.length > 0) {
+          markdown += `#### ${result.name}.js\n\n`;
+
+          result.lintIssues.forEach((issue) => {
+            const severity = issue.severity === 2 ? "🔴 ERROR" : "🟡 WARNING";
+            markdown +=
+              `- **${severity}** (Line ${issue.line}, Column ${issue.column}): ${issue.message}\n`;
+          });
+
+          markdown += `\n`;
+        }
+      });
+
+      markdown += `---\n\n`;
+    }
+  });
+
+  if (!hasLintIssues) {
+    markdown += `✅ **No lint issues found across all submissions!**\n\n`;
+  }
+
+  // Performance Insights
+  markdown += `## 💡 Performance Insights\n\n`;
+
+  const highPerformers = sortedInterns.filter((intern) => intern.score >= 90);
+  const lowPerformers = sortedInterns.filter((intern) => intern.score < 60);
+  const mostCommonIssues = getMostCommonLintIssues(sortedInterns);
+
+  if (highPerformers.length > 0) {
+    markdown += `### 🌟 Top Performers (≥90%)\n`;
+    highPerformers.forEach((intern) => {
+      markdown +=
+        `- **${intern.name}**: ${intern.score}% (${intern.issues} lint issues)\n`;
+    });
+    markdown += `\n`;
+  }
+
+  if (lowPerformers.length > 0) {
+    markdown += `### ⚠️ Need Attention (<60%)\n`;
+    lowPerformers.forEach((intern) => {
+      markdown +=
+        `- **${intern.name}**: ${intern.score}% (${intern.failed} failed tests, ${intern.issues} lint issues)\n`;
+    });
+    markdown += `\n`;
+  }
+
+  if (mostCommonIssues.length > 0) {
+    markdown += `### 🔄 Most Common Lint Issues\n`;
+    mostCommonIssues.forEach((issue, index) => {
+      markdown += `${
+        index + 1
+      }. **${issue.message}** (${issue.count} occurrences)\n`;
+    });
+    markdown += `\n`;
+  }
+
+  markdown += `---\n`;
+  markdown += `*Report generated automatically by Assignment Dashboard*`;
+
+  // Copy to clipboard
+  copyToClipboard(markdown);
+}
+
+// Helper function to get most common lint issues
+function getMostCommonLintIssues(interns) {
+  const issueCount = {};
+
+  interns.forEach((intern) => {
+    if (intern.results) {
+      intern.results.forEach((result) => {
+        if (result.lintIssues) {
+          result.lintIssues.forEach((issue) => {
+            const key = issue.message;
+            issueCount[key] = (issueCount[key] || 0) + 1;
+          });
+        }
+      });
+    }
+  });
+
+  return Object.entries(issueCount)
+    .map(([message, count]) => ({ message, count }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 5); // Top 5 most common issues
+}
+
+// Copy text to clipboard with user feedback
+async function copyToClipboard(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    showNotification("Report copied to clipboard!", "success");
+  } catch (err) {
+    console.error("Failed to copy to clipboard:", err);
+
+    // Fallback for older browsers
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.style.position = "fixed";
+    textArea.style.left = "-999999px";
+    textArea.style.top = "-999999px";
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+
+    try {
+      document.execCommand("copy");
+      showNotification("Report copied to clipboard!", "success");
+    } catch (err) {
+      showNotification("Failed to copy report. Please try again.", "error");
+    }
+
+    document.body.removeChild(textArea);
+  }
+}
+
+// Show notification to user
+function showNotification(message, type = "info") {
+  // Remove any existing notification
+  const existingNotification = document.querySelector(".notification");
+  if (existingNotification) {
+    existingNotification.remove();
+  }
+
+  const notification = document.createElement("div");
+  notification.className = `notification notification-${type}`;
+  notification.textContent = message;
+
+  // Style the notification
+  notification.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-weight: 500;
+    z-index: 10000;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    max-width: 350px;
+  `;
+
+  // Set colors based on type
+  if (type === "success") {
+    notification.style.background = "#28a745";
+    notification.style.color = "white";
+  } else if (type === "error") {
+    notification.style.background = "#dc3545";
+    notification.style.color = "white";
+  } else {
+    notification.style.background = "#007bff";
+    notification.style.color = "white";
+  }
+
+  document.body.appendChild(notification);
+
+  // Animate in
+  setTimeout(() => {
+    notification.style.transform = "translateX(0)";
+    notification.style.opacity = "1";
+  }, 10);
+
+  // Remove after 3 seconds
+  setTimeout(() => {
+    notification.style.transform = "translateX(100%)";
+    notification.style.opacity = "0";
+    setTimeout(() => {
+      if (notification.parentNode) {
+        notification.parentNode.removeChild(notification);
+      }
+    }, 300);
+  }, 3000);
+}
+
 // Initialize the application
 document.addEventListener("DOMContentLoaded", function () {
   init();
