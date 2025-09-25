@@ -156,7 +156,6 @@ body {
 }
 
 .intern-list {
-    max-height: 70vh;
     overflow-y: auto;
 }
 
@@ -285,10 +284,6 @@ body {
         font-size: 13px;
     }
 
-    .intern-list {
-        max-height: 80vh;
-    }
-
     .container {
         padding: 20px;
     }
@@ -298,10 +293,6 @@ body {
 @media (min-width: 1440px) {
     .intern-row {
         padding: 6px 16px;
-    }
-
-    .intern-list {
-        max-height: 85vh;
     }
 
     .results-container {

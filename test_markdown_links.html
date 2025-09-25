@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Markdown Links</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 20px auto; padding: 20px; }
+        .test-section { margin: 20px 0; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
+        .generated-markdown { background: #f8f9fa; padding: 15px; border-radius: 4px; white-space: pre-wrap; font-family: monospace; }
+        button { padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .result { margin-top: 15px; padding: 15px; background: #d4edda; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <h1>Test Markdown Report with Clickable Links</h1>
+    
+    <div class="test-section">
+        <h2>Sample Generated Markdown</h2>
+        <p>This demonstrates how the clickable links will appear in the markdown report:</p>
+        
+        <div class="generated-markdown">## 👥 Individual Intern Performance
+
+| Rank | Intern Name | Score | Tests Passed | Tests Failed | Lint Issues |
+|------|-------------|-------|--------------|--------------|-------------|
+| 1 | [Alice Johnson](#alice-johnson) | 92% | 8 | 2 | 1 |
+| 2 | [Bob Smith](#bob-smith) | 85% | 7 | 3 | 4 |
+| 3 | [Carol Davis](#carol-davis) | 78% | 6 | 4 | 7 |
+
+## 🔍 Detailed Lint Issues
+
+### Alice Johnson {#alice-johnson}
+
+#### main.js
+
+- **🔴 ERROR** (Line 15, Column 10): Missing semicolon
+
+---
+
+### Bob Smith {#bob-smith}
+
+#### main.js
+
+- **🟡 WARNING** (Line 5, Column 8): Unused variable 'temp'
+- **🔴 ERROR** (Line 20, Column 1): Unexpected token
+
+#### utils.js
+
+- **🟡 WARNING** (Line 12, Column 15): Console statement should be removed
+- **🟡 WARNING** (Line 18, Column 5): Prefer const over let
+
+---
+
+### Carol Davis {#carol-davis}
+
+#### main.js
+
+- **🟡 WARNING** (Line 3, Column 12): Missing space after comma
+- **🟡 WARNING** (Line 8, Column 20): Trailing comma
+- **🔴 ERROR** (Line 25, Column 1): Function is not defined
+
+#### helper.js
+
+- **🟡 WARNING** (Line 7, Column 10): Variable name should be camelCase
+- **🟡 WARNING** (Line 14, Column 3): Inconsistent indentation
+- **🟡 WARNING** (Line 22, Column 8): Empty block statement
+- **🟡 WARNING** (Line 30, Column 15): Prefer template literals
+
+---</div>
+        
+        <button onclick="testMarkdownConversion()">Test Markdown to HTML Conversion</button>
+        
+        <div id="result" class="result" style="display: none;">
+            <h3>Rendered HTML Result:</h3>
+            <div id="rendered-content"></div>
+        </div>
+    </div>
+
+    <script>
+        function testMarkdownConversion() {
+            // This simulates how the markdown would be rendered with links
+            const markdownContent = `<h2>👥 Individual Intern Performance</h2>
+<table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>Intern Name</th>
+<th>Score</th>
+<th>Tests Passed</th>
+<th>Tests Failed</th>
+<th>Lint Issues</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><a href="#alice-johnson">Alice Johnson</a></td>
+<td>92%</td>
+<td>8</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="#bob-smith">Bob Smith</a></td>
+<td>85%</td>
+<td>7</td>
+<td>3</td>
+<td>4</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="#carol-davis">Carol Davis</a></td>
+<td>78%</td>
+<td>6</td>
+<td>4</td>
+<td>7</td>
+</tr>
+</tbody>
+</table>
+
+<h2>🔍 Detailed Lint Issues</h2>
+
+<h3 id="alice-johnson">Alice Johnson</h3>
+<h4>main.js</h4>
+<ul>
+<li><strong>🔴 ERROR</strong> (Line 15, Column 10): Missing semicolon</li>
+</ul>
+<hr>
+
+<h3 id="bob-smith">Bob Smith</h3>
+<h4>main.js</h4>
+<ul>
+<li><strong>🟡 WARNING</strong> (Line 5, Column 8): Unused variable 'temp'</li>
+<li><strong>🔴 ERROR</strong> (Line 20, Column 1): Unexpected token</li>
+</ul>
+<h4>utils.js</h4>
+<ul>
+<li><strong>🟡 WARNING</strong> (Line 12, Column 15): Console statement should be removed</li>
+<li><strong>🟡 WARNING</strong> (Line 18, Column 5): Prefer const over let</li>
+</ul>
+<hr>
+
+<h3 id="carol-davis">Carol Davis</h3>
+<h4>main.js</h4>
+<ul>
+<li><strong>🟡 WARNING</strong> (Line 3, Column 12): Missing space after comma</li>
+<li><strong>🟡 WARNING</strong> (Line 8, Column 20): Trailing comma</li>
+<li><strong>🔴 ERROR</strong> (Line 25, Column 1): Function is not defined</li>
+</ul>
+<h4>helper.js</h4>
+<ul>
+<li><strong>🟡 WARNING</strong> (Line 7, Column 10): Variable name should be camelCase</li>
+<li><strong>🟡 WARNING</strong> (Line 14, Column 3): Inconsistent indentation</li>
+<li><strong>🟡 WARNING</strong> (Line 22, Column 8): Empty block statement</li>
+<li><strong>🟡 WARNING</strong> (Line 30, Column 15): Prefer template literals</li>
+</ul>
+<hr>`;
+
+            document.getElementById('rendered-content').innerHTML = markdownContent;
+            document.getElementById('result').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

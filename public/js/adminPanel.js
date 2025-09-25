@@ -491,9 +491,13 @@ function generateMarkdownReport() {
 
   const sortedInterns = [...internsData].sort((a, b) => b.score - a.score);
   sortedInterns.forEach((intern, index) => {
+    // Create anchor-friendly name for linking
+    const anchorName = intern.name.toLowerCase().replace(/[^a-z0-9]/g, '-');
+    const internNameLink = `[${intern.name}](#${anchorName})`;
+    
     markdown += `| ${
       index + 1
-    } | ${intern.name} | ${intern.score}% | ${intern.passed} | ${intern.failed} | ${intern.issues} |\n`;
+    } | ${internNameLink} | ${intern.score}% | ${intern.passed} | ${intern.failed} | ${intern.issues} |\n`;
   });
 
   markdown += `\n`;
@@ -513,7 +517,9 @@ function generateMarkdownReport() {
 
     if (internHasIssues) {
       hasLintIssues = true;
-      markdown += `### ${intern.name}\n\n`;
+      // Create anchor-friendly name for linking
+      const anchorName = intern.name.toLowerCase().replace(/[^a-z0-9]/g, '-');
+      markdown += `### ${intern.name} {#${anchorName}}\n\n`;
 
       intern.results.forEach((result) => {
         if (result.lintIssues && result.lintIssues.length > 0) {
@@ -623,7 +629,7 @@ async function copyToClipboard(text) {
     try {
       document.execCommand("copy");
       showNotification("Report copied to clipboard!", "success");
-    } catch (err) {
+    } catch (_err) {
       showNotification("Failed to copy report. Please try again.", "error");
     }
 

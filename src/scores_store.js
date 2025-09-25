@@ -6,7 +6,10 @@ export default class ScoresStore {
 
   addScores(assignmentId, scores) {
     return Promise.all(
-      scores.map((score) => this.#store.set([assignmentId, score.name], score)),
+      scores.map((score) => this.#store.set([assignmentId, score.name], score))
+        .catch((e) => {
+          console.error("Error adding score for", score.name, e);
+        }),
     );
   }
 
@@ -33,7 +36,9 @@ export default class ScoresStore {
   }
 
   async clear() {
-    const stats = await Array.fromAsync(await this.#store.list({ prefix: ["stats"] }));
+    const stats = await Array.fromAsync(
+      await this.#store.list({ prefix: ["stats"] }),
+    );
     const assignments = await Array.fromAsync(
       await this.#store.list({ prefix: ["js-assignment-1"] }),
     );
