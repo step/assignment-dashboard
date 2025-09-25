@@ -43,12 +43,45 @@ const updateRepo = async (fullName, store) => {
   evaluateAssignment(assignmentName, store);
 };
 
+class ReportUpdateScheduler {
+  constructor(store, interval) {
+    this.buffer = new Set();
+    this.store = store;
+    this.interval = interval;
+    this.isProcessing = false;
+    this.run();
+  }
+
+  run() {
+    setInterval(() => {
+      const reposToUpdate = new Array(...this.buffer);
+      console.log(`Starting update for ${reposToUpdate.length} repositories`);
+      // reposToUpdate.forEach((repoFullName) => {
+      if (reposToUpdate.length === 0) return;
+      console.log(`Processing update for ${reposToUpdate[0]}`);
+      updateRepo(reposToUpdate[0], this.store);
+      this.buffer.clear();
+    }, this.interval);
+  }
+
+  scheduleUpdate(repoFullName) {
+    const { id } = githubIds.find(({ id }) => repoFullName.endsWith(`-${id}`));
+    console.log(`Scheduling update for ${repoFullName.replace(`-${id}`, "")}`);
+    this.buffer.add(repoFullName.replace(`-${id}`, ""));
+  }
+}
+
+let scheduler;
+
 export const handleWebhook = async (c, store) => {
   const payload = await c.req.json();
   const { repository: { full_name } } = payload;
   if (full_name === "step-batch-11/js-functions-1-pradipta1023") {
     return c.json({ message: "Ignoring test repository webhook" });
   }
-  updateRepo(full_name, store);
-  return c.json({ message: `Received webhook for repository: ${name}` });
+  if (!scheduler) {
+    scheduler = new ReportUpdateScheduler(store, 2 * 60 * 1000); // 2 minutes interval
+  }
+  scheduler.scheduleUpdate(full_name);
+  return c.json({ message: `Received webhook for repository: ${full_name}` });
 };
