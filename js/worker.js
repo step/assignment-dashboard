@@ -35,16 +35,21 @@ const startBatchWorker = () => {
 
 startBatchWorker();
 
-const SOCMarker = "// START YOUR CODE AFTER THIS LINE. DO NOT REMOVE THIS LINE\n";
+const SOCMarker =
+  "// START YOUR CODE AFTER THIS LINE. DO NOT REMOVE THIS LINE\n";
 
-const lintCode = async (linter, code) => {
+const getCodeToLint = (code) => {
+  if (!code.includes(SOCMarker)) return code;
   const [setup, solution] = code.split(SOCMarker);
-  const codeToLint = `/* eslint-disable */
+
+  return `/* eslint-disable */
 ${setup}
 ${SOCMarker}/* eslint-enable */
 ${solution}`;
+};
 
-  const result = await linter.lintText(codeToLint);
+const lintCode = async (linter, code) => {
+  const result = await linter.lintText(getCodeToLint(code));
   return result.map((r) => r.messages)
     .flat()
     .map((issue) => ({
