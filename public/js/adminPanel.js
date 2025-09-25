@@ -705,3 +705,7 @@ document.addEventListener("DOMContentLoaded", function () {
     Prism.highlightAll();
   }
 });
+
+setInterval(() => {
+  globalThis.location.reload();
+}, 60 * 1000);
