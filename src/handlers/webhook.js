@@ -44,6 +44,9 @@ const updateRepo = async (fullName, store) => {
 export const handleWebhook = async (c, store) => {
   const payload = await c.req.json();
   const { repository: { full_name } } = payload;
+  if (full_name === 'step-batch-11/js-functions-1-pradipta1023') {
+    return c.json({ message: 'Ignoring test repository webhook' });
+  }
   updateRepo(full_name, store);
   return c.json({ message: `Received webhook for repository: ${name}` });
 };
