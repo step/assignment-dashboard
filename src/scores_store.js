@@ -6,10 +6,12 @@ export default class ScoresStore {
 
   addScores(assignmentId, scores) {
     return Promise.all(
-      scores.map((score) => this.#store.set([assignmentId, score.name], score))
-        .catch((e) => {
-          console.error("Error adding score for", score.name, e);
-        }),
+      scores.map((score) =>
+        this.#store.set([assignmentId, score.name], score)
+          .catch((e) => {
+            console.error("Error adding score for", score.name, e);
+          })
+      ),
     );
   }
 
