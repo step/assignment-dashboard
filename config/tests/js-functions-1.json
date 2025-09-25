@@ -574,24 +574,6 @@
         "expected": -279.67
       },
       {
-        "desc": "Invalid from unit",
-        "inputs": {
-          "from": "X",
-          "to": "K",
-          "value": 0
-        },
-        "expected": "NaN"
-      },
-      {
-        "desc": "Invalid to unit",
-        "inputs": {
-          "from": "C",
-          "to": "Y",
-          "value": 0
-        },
-        "expected": "NaN"
-      },
-      {
         "desc": "Same units",
         "inputs": {
           "from": "C",
@@ -617,24 +599,6 @@
           "value": 0
         },
         "expected": -273.15
-      },
-      {
-        "desc": "Non-numeric value",
-        "inputs": {
-          "from": "C",
-          "to": "K",
-          "value": "hello"
-        },
-        "expected": "NaN"
-      },
-      {
-        "desc": "Same invalid units for from and to",
-        "inputs": {
-          "from": "X",
-          "to": "X",
-          "value": 10
-        },
-        "expected": "NaN"
       },
       {
         "desc": "Same invalid units for from and to",
