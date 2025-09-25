@@ -35,7 +35,7 @@ export const githubIds = [
   "som3000",
   "Foam-Ranther",
   "LakshmiCharitha349",
-  "Pradipta1023",
+  "pradipta1023",
   "Bhargavipeddakota",
   "Lavkushkatiyar",
   "Jaguar-H",

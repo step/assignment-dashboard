@@ -233,6 +233,9 @@ const initializeApp = async () => {
     if (copyButton) {
       copyButton.addEventListener("click", copyScoresAsMarkdown);
     }
+    setTimeout(() => {
+      globalThis.location.reload();
+    }, 60 * 1000);
   } catch (_error) {
     hideLoading();
     showError("Failed to load assignment results. Please try again later.");
