@@ -637,13 +637,13 @@
         "expected": "NaN"
       },
       {
-        "desc": "Same invalid units for from and to",
+        "desc": "C To K at zero",
         "inputs": {
           "from": "C",
           "to": "K",
           "value": "0"
         },
-        "expected": 273.15
+        "expected": "NaN"
       }
     ]
   }
