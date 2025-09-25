@@ -1,4 +1,5 @@
 import { assignments } from "../../config/assignments.js";
+import { githubIds } from "../../config/github_ids.js";
 import { testAssignment } from "../../js/main.js";
 
 const calculateStats = (scores) => {
@@ -47,6 +48,9 @@ export const evaluateAssignment = async (assignmentId, store) => {
     ...calculateStats(scores),
     date,
     name: assignmentId,
+  });
+  scores.forEach(s => {
+    s.name = githubIds.find(g => g.id === s.name)?.name || s.name;
   });
   await store.addScores(assignmentId, scores);
 };

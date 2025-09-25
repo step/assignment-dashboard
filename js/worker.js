@@ -97,7 +97,7 @@ const createJobs = async (blobURL, tests, lintConfig) => {
 };
 
 self.addEventListener("message", async (event) => {
-  const { githubId, assignment, tests, lintConfig } = event.data;
+  const {  githubId, assignment, tests, lintConfig } = event.data;
   const blobURL = "/source/" + assignment + "/" + githubId + ".zip";
 
   try {

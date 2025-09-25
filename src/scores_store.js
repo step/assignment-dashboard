@@ -42,7 +42,7 @@ export default class ScoresStore {
       await this.#store.list({ prefix: ["stats"] }),
     );
     const assignments = await Array.fromAsync(
-      await this.#store.list({ prefix: ["js-assignment-1"] }),
+      await this.#store.list({ prefix: ["js-functions-1"] }),
     );
     stats.forEach((s) => {
       this.#store.delete(s.key);

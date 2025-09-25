@@ -16,16 +16,18 @@ const fetchRepo = async (organization, repo) => {
 
 const getRepoDetails = (fullName) => {
   const [organization, repo] = fullName.split("/");
-  const githubUsername = githubIds.find((id) => fullName.endsWith(`-${id}`));
+  const githubUsername = githubIds.map(({ id }) => id).find((id) =>
+    fullName.endsWith(`-${id}`)
+  );
   const assignmentName = repo.replace(`-${githubUsername}`, "");
   return { organization, assignmentName };
 };
 
 const fetchRepos = async (organization, assignmentName) => {
-  return await Promise.all(githubIds.map(async (username) => {
-    const code = await fetchRepo(organization, `${assignmentName}-${username}`);
+  return await Promise.all(githubIds.map(async ({ id }) => {
+    const code = await fetchRepo(organization, `${assignmentName}-${id}`);
     await Deno.writeFile(
-      `./source/${assignmentName}/${username}.zip`,
+      `./source/${assignmentName}/${id}.zip`,
       new Uint8Array(code),
     );
   }));
@@ -44,8 +46,8 @@ const updateRepo = async (fullName, store) => {
 export const handleWebhook = async (c, store) => {
   const payload = await c.req.json();
   const { repository: { full_name } } = payload;
-  if (full_name === 'step-batch-11/js-functions-1-pradipta1023') {
-    return c.json({ message: 'Ignoring test repository webhook' });
+  if (full_name === "step-batch-11/js-functions-1-pradipta1023") {
+    return c.json({ message: "Ignoring test repository webhook" });
   }
   updateRepo(full_name, store);
   return c.json({ message: `Received webhook for repository: ${name}` });

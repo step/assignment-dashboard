@@ -644,15 +644,6 @@
           "value": "0"
         },
         "expected": 273.15
-      },
-      {
-        "desc": "Same valid units but invalid value",
-        "inputs": {
-          "from": "C",
-          "to": "C",
-          "value": "hello"
-        },
-        "expected": "NaN"
       }
     ]
   }

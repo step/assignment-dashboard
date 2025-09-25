@@ -13,8 +13,9 @@ export const testAssignment = async (assignmentName) => {
   const assignment = assignmentName;
   try {
     const tests = await getTests(assignment);
-    const testJobs = githubIds.map((githubId) => ({
-      githubId,
+    const testJobs = githubIds.map(({ name, id }) => ({
+      name,
+      githubId: id,
       assignment,
       tests,
       eslintConfig,
