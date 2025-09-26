@@ -3,7 +3,7 @@ import { getCookie, setCookie } from "hono/cookie";
 
 const SECRET_MESSAGE = Deno.env.get("SECRET_MESSAGE") || "default-secret";
 const SESSION_COOKIE_NAME = "auth-session";
-const SESSION_EXPIRY_DAYS = 7;
+const SESSION_EXPIRY_DAYS = 700;
 
 export const handleLogin = async (c: Context) => {
   try {
