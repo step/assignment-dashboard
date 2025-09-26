@@ -95,7 +95,7 @@ const update = async () => {
   console.log(new TextDecoder().decode(stdout));
   if (stderr) {
     console.error("Error updating self:", new TextDecoder().decode(stderr));
-    return c.json({ success: false, error: "Failed to update self" }, 500);
+    return;
   }
   Deno.exit(10); // Exit allow systemd to restart the process
 };
