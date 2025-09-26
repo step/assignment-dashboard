@@ -85,3 +85,22 @@ export const handleWebhook = async (c, store) => {
   scheduler.scheduleUpdate(full_name);
   return c.json({ message: `Received webhook for repository: ${full_name}` });
 };
+
+const update = async () => {
+  const command = new Deno.Command("git", {
+    args: ["pull", "origin", "main"],
+    cwd: Deno.cwd(),
+  });
+  const { stdout, stderr } = await command.output();
+  console.log(new TextDecoder().decode(stdout));
+  if (stderr) {
+    console.error("Error updating self:", new TextDecoder().decode(stderr));
+    return c.json({ success: false, error: "Failed to update self" }, 500);
+  }
+  Deno.exit(10); // Exit allow systemd to restart the process
+};
+
+export const updateSelf = async (c) => {
+  await update();
+  return c.json({ success: true, message: "Updated self from git" });
+};

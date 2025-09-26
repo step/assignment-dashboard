@@ -9,7 +9,7 @@ import {
   getAssignments,
   serveAssignmentScore,
 } from "./handlers/assignment.js";
-import { handleWebhook } from "./handlers/webhook.js";
+import { handleWebhook, updateSelf } from "./handlers/webhook.js";
 import {
   checkAuthStatus,
   handleLogin,
@@ -73,6 +73,8 @@ export const createApp = async () => {
     requireAuth,
     (c) => serveAssignmentScore(c, store),
   );
+
+  app.post("/api/update-self", updateSelf);
 
   return app;
 };
