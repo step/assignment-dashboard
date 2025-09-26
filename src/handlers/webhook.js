@@ -80,7 +80,7 @@ export const handleWebhook = async (c, store) => {
     return c.json({ message: "Ignoring test repository webhook" });
   }
   if (!scheduler) {
-    scheduler = new ReportUpdateScheduler(store, 2 * 60 * 1000); // 2 minutes interval
+    scheduler = new ReportUpdateScheduler(store, 1000); // 2 minutes interval
   }
   scheduler.scheduleUpdate(full_name);
   return c.json({ message: `Received webhook for repository: ${full_name}` });

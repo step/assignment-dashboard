@@ -5,7 +5,13 @@ let currentTab = "tests";
 let currentIntern = null;
 let assignmentId = null;
 
-function init() {
+async function init() {
+  // Initialize authentication first
+  const isAuthenticated = await window.authUtils.initAuth();
+  if (!isAuthenticated) {
+    return; // Will be redirected to login
+  }
+
   extractAssignmentId();
   if (assignmentId) {
     fetchInternData();
@@ -26,7 +32,10 @@ function extractAssignmentId() {
 
 async function fetchInternData() {
   try {
-    const response = await fetch(`/api/admin/${assignmentId}/score`);
+    const response = await window.authUtils.authenticatedFetch(
+      `/api/admin/${assignmentId}/score`,
+    );
+    if (!response) return; // redirected to login
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -209,6 +218,9 @@ function goBack() {
   document.getElementById("main-view").style.display = "block";
 }
 
+// Make functions globally available for HTML onclick handlers
+globalThis.goBack = goBack;
+
 function selectFile(fileName) {
   currentFile = fileName;
 
@@ -239,6 +251,9 @@ function selectTab(tabName) {
 
   updateContent();
 }
+
+// Make functions globally available for HTML onclick handlers
+globalThis.selectTab = selectTab;
 
 function updateContent() {
   if (!currentIntern) return;
@@ -492,9 +507,9 @@ function generateMarkdownReport() {
   const sortedInterns = [...internsData].sort((a, b) => b.score - a.score);
   sortedInterns.forEach((intern, index) => {
     // Create anchor-friendly name for linking
-    const anchorName = intern.name.toLowerCase().replace(/[^a-z0-9]/g, '-');
+    const anchorName = intern.name.toLowerCase().replace(/[^a-z0-9]/g, "-");
     const internNameLink = `[${intern.name}](#${anchorName})`;
-    
+
     markdown += `| ${
       index + 1
     } | ${internNameLink} | ${intern.score}% | ${intern.passed} | ${intern.failed} | ${intern.issues} |\n`;
@@ -518,7 +533,7 @@ function generateMarkdownReport() {
     if (internHasIssues) {
       hasLintIssues = true;
       // Create anchor-friendly name for linking
-      const anchorName = intern.name.toLowerCase().replace(/[^a-z0-9]/g, '-');
+      const anchorName = intern.name.toLowerCase().replace(/[^a-z0-9]/g, "-");
       markdown += `### ${intern.name} {#${anchorName}}\n\n`;
 
       intern.results.forEach((result) => {
@@ -584,6 +599,9 @@ function generateMarkdownReport() {
   // Copy to clipboard
   copyToClipboard(markdown);
 }
+
+// Make functions globally available for HTML onclick handlers
+globalThis.generateMarkdownReport = generateMarkdownReport;
 
 // Helper function to get most common lint issues
 function getMostCommonLintIssues(interns) {
