@@ -1,0 +1,475 @@
+[
+    {
+        "name": "count_vowels",
+        "file": "01_count_vowels.js",
+        "fnName": "countVowels",
+        "args": [
+            "sentence"
+        ],
+        "cases": [
+            {
+                "desc": "Empty string should return 0",
+                "inputs": {
+                    "sentence": ""
+                },
+                "expected": 0
+            },
+            {
+                "desc": "String with no vowels should return 0",
+                "inputs": {
+                    "sentence": "rhythms"
+                },
+                "expected": 0
+            },
+            {
+                "desc": "Single vowel in lowercase",
+                "inputs": {
+                    "sentence": "a"
+                },
+                "expected": 1
+            },
+            {
+                "desc": "Single vowel in uppercase",
+                "inputs": {
+                    "sentence": "E"
+                },
+                "expected": 1
+            },
+            {
+                "desc": "All vowels lowercase once",
+                "inputs": {
+                    "sentence": "aeiou"
+                },
+                "expected": 5
+            },
+            {
+                "desc": "All vowels uppercase once",
+                "inputs": {
+                    "sentence": "AEIOU"
+                },
+                "expected": 5
+            },
+            {
+                "desc": "Mixed vowels and consonants in lowercase",
+                "inputs": {
+                    "sentence": "hello world"
+                },
+                "expected": 3
+            },
+            {
+                "desc": "Mixed vowels and consonants with uppercase letters",
+                "inputs": {
+                    "sentence": "HELLO World"
+                },
+                "expected": 3
+            },
+            {
+                "desc": "Sentence with punctuation and spaces",
+                "inputs": {
+                    "sentence": "Hi! How are you?"
+                },
+                "expected": 6
+            },
+            {
+                "desc": "Sentence with numbers included",
+                "inputs": {
+                    "sentence": "Th3 qu1ck br0wn f0x"
+                },
+                "expected": 1
+            },
+            {
+                "desc": "Sentence with repeated vowels",
+                "inputs": {
+                    "sentence": "banana"
+                },
+                "expected": 3
+            },
+            {
+                "desc": "Long sentence with mixed cases and punctuation",
+                "inputs": {
+                    "sentence": "Programming in JavaScript is FUN!"
+                },
+                "expected": 9
+            },
+            {
+                "desc": "Sentence with only consonants uppercase and lowercase",
+                "inputs": {
+                    "sentence": "BCDFGHJKLMNPQRSTVWXYZbcdfghjklmnpqrstvwxyz"
+                },
+                "expected": 0
+            }
+        ]
+    },
+    {
+        "name": "reverse_string",
+        "file": "02_reverse_string.js",
+        "fnName": "reverseString",
+        "args": [
+            "sentence"
+        ],
+        "cases": [
+            {
+                "desc": "Empty string should return empty string",
+                "inputs": {
+                    "str": ""
+                },
+                "expected": ""
+            },
+            {
+                "desc": "Single character string should return itself",
+                "inputs": {
+                    "str": "a"
+                },
+                "expected": "a"
+            },
+            {
+                "desc": "Simple word reversal",
+                "inputs": {
+                    "str": "hello"
+                },
+                "expected": "olleh"
+            },
+            {
+                "desc": "Palindrome should remain same when reversed",
+                "inputs": {
+                    "str": "madam"
+                },
+                "expected": "madam"
+            },
+            {
+                "desc": "Reversal of string with spaces",
+                "inputs": {
+                    "str": "hello world"
+                },
+                "expected": "dlrow olleh"
+            },
+            {
+                "desc": "Reversal of string with leading and trailing spaces",
+                "inputs": {
+                    "str": "  spaced  "
+                },
+                "expected": "  decaps  "
+            },
+            {
+                "desc": "Reversal of string with mixed alphanumeric characters",
+                "inputs": {
+                    "str": "abc123"
+                },
+                "expected": "321cba"
+            },
+            {
+                "desc": "Reversal of string with special characters",
+                "inputs": {
+                    "str": "!@#$%"
+                },
+                "expected": "%$#@!"
+            },
+            {
+                "desc": "Reversal of string with mixed case letters",
+                "inputs": {
+                    "str": "AbC"
+                },
+                "expected": "CbA"
+            },
+            {
+                "desc": "Longer sentence with punctuation",
+                "inputs": {
+                    "str": "Hello, World!"
+                },
+                "expected": "!dlroW ,olleH"
+            }
+        ]
+    },
+    {
+        "name": "trim",
+        "file": "03_trim.js",
+        "fnName": "trim",
+        "args": [
+            "sentence"
+        ],
+        "cases": [
+            {
+                "desc": "Empty string should return empty string",
+                "inputs": {
+                    "str": ""
+                },
+                "expected": ""
+            },
+            {
+                "desc": "String without spaces should remain unchanged",
+                "inputs": {
+                    "str": "hello"
+                },
+                "expected": "hello"
+            },
+            {
+                "desc": "String with leading spaces only",
+                "inputs": {
+                    "str": "   hello"
+                },
+                "expected": "hello"
+            },
+            {
+                "desc": "String with trailing spaces only",
+                "inputs": {
+                    "str": "world   "
+                },
+                "expected": "world"
+            },
+            {
+                "desc": "String with both leading and trailing spaces",
+                "inputs": {
+                    "str": "   hello world   "
+                },
+                "expected": "hello world"
+            },
+            {
+                "desc": "String with only spaces",
+                "inputs": {
+                    "str": "     "
+                },
+                "expected": ""
+            },
+            {
+                "desc": "String with tabs and spaces around",
+                "inputs": {
+                    "str": "\t  hello  \t"
+                },
+                "expected": "hello"
+            },
+            {
+                "desc": "String with newline characters around",
+                "inputs": {
+                    "str": "\nhello\n"
+                },
+                "expected": "hello"
+            },
+            {
+                "desc": "String with multiple types of whitespace",
+                "inputs": {
+                    "str": " \t\n hello world \n\t "
+                },
+                "expected": "hello world"
+            },
+            {
+                "desc": "String with inner spaces preserved",
+                "inputs": {
+                    "str": "   multiple   spaces   inside   "
+                },
+                "expected": "multiple   spaces   inside"
+            }
+        ]
+    },
+    {
+        "name": "remove_adjacent_duplicate_spaces",
+        "file": "04_remove_adjacent_duplicate_spaces.js",
+        "fnName": "removeAdjacentDuplicateSpaces",
+        "args": [
+            "sentence"
+        ],
+        "cases": [
+            {
+                "desc": "Empty string should return empty string",
+                "inputs": {
+                    "sentence": ""
+                },
+                "expected": ""
+            },
+            {
+                "desc": "String with no duplicate spaces should remain unchanged",
+                "inputs": {
+                    "sentence": "hello world"
+                },
+                "expected": "hello world"
+            },
+            {
+                "desc": "String with multiple consecutive spaces reduced to single space",
+                "inputs": {
+                    "sentence": "statement      with    two spaces"
+                },
+                "expected": "statement with two spaces"
+            },
+            {
+                "desc": "Leading and trailing multiple spaces collapsed to single space",
+                "inputs": {
+                    "sentence": "   hello    world   "
+                },
+                "expected": " hello world "
+            },
+            {
+                "desc": "String with only spaces should collapse to a single space",
+                "inputs": {
+                    "sentence": "        "
+                },
+                "expected": " "
+            },
+            {
+                "desc": "String with words separated by many spaces",
+                "inputs": {
+                    "sentence": "a     b          c"
+                },
+                "expected": "a b c"
+            },
+            {
+                "desc": "String with mixed single and multiple spaces",
+                "inputs": {
+                    "sentence": "this  is   a test"
+                },
+                "expected": "this is a test"
+            },
+            {
+                "desc": "String with spaces around punctuation",
+                "inputs": {
+                    "sentence": "hello ,    world !"
+                },
+                "expected": "hello , world !"
+            }
+        ]
+    },
+    {
+        "name": "count_words",
+        "file": "05_count_words.js",
+        "fnName": "countWords",
+        "args": [
+            "sentence"
+        ],
+        "cases": [
+            {
+                "desc": "Empty string should return 0 words",
+                "inputs": {
+                    "sentence": ""
+                },
+                "expected": 0
+            },
+            {
+                "desc": "String with only spaces should return 0 words",
+                "inputs": {
+                    "sentence": "     "
+                },
+                "expected": 0
+            },
+            {
+                "desc": "Single word with no spaces",
+                "inputs": {
+                    "sentence": "hello"
+                },
+                "expected": 1
+            },
+            {
+                "desc": "Two words separated by a single space",
+                "inputs": {
+                    "sentence": "hello world"
+                },
+                "expected": 2
+            },
+            {
+                "desc": "Words separated by multiple spaces",
+                "inputs": {
+                    "sentence": "hello     world"
+                },
+                "expected": 2
+            },
+            {
+                "desc": "Words with leading and trailing spaces",
+                "inputs": {
+                    "sentence": "   hello world   "
+                },
+                "expected": 2
+            },
+            {
+                "desc": "Sentence with punctuation treated as part of words",
+                "inputs": {
+                    "sentence": "hello, world!"
+                },
+                "expected": 2
+            },
+            {
+                "desc": "Words separated by tabs",
+                "inputs": {
+                    "sentence": "hello\tworld"
+                },
+                "expected": 2
+            },
+            {
+                "desc": "Words separated by newlines",
+                "inputs": {
+                    "sentence": "hello\nworld"
+                },
+                "expected": 2
+            },
+            {
+                "desc": "Sentence with multiple whitespace types mixed",
+                "inputs": {
+                    "sentence": "hello   \t   world \n test"
+                },
+                "expected": 3
+            },
+            {
+                "desc": "Longer sentence with punctuation and spaces",
+                "inputs": {
+                    "sentence": "The quick, brown fox jumps over the lazy dog."
+                },
+                "expected": 9
+            }
+        ]
+    },
+    {
+        "name": "to_camel_case",
+        "file": "06_to_camel_case.js",
+        "fnName": "toCamelCase",
+        "args": [
+            "sentence"
+        ],
+        "cases": [
+            {
+                "desc": "Empty string should return empty string",
+                "inputs": {
+                    "sentence": ""
+                },
+                "expected": ""
+            },
+            {
+                "desc": "Single lowercase word remains unchanged",
+                "inputs": {
+                    "sentence": "hello"
+                },
+                "expected": "hello"
+            },
+            {
+                "desc": "Single uppercase word becomes lowercase",
+                "inputs": {
+                    "sentence": "HELLO"
+                },
+                "expected": "hello"
+            },
+            {
+                "desc": "Simple snake_case converts to camelCase",
+                "inputs": {
+                    "sentence": "hello_world"
+                },
+                "expected": "helloWorld"
+            },
+            {
+                "desc": "Longer snake_case string",
+                "inputs": {
+                    "sentence": "this_is_a_test"
+                },
+                "expected": "thisIsATest"
+            },
+            {
+                "desc": "String with mixed case should normalize correctly",
+                "inputs": {
+                    "sentence": "HeLLo_WoRLD_Text01"
+                },
+                "expected": "helloWorldText01"
+            },
+            {
+                "desc": "String with multiple words",
+                "inputs": {
+                    "sentence": "convert_this_to_camel"
+                },
+                "expected": "convertThisToCamel"
+            }
+        ]
+    }
+]
