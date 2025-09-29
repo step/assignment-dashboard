@@ -469,6 +469,41 @@
                     "sentence": "convert_this_to_camel"
                 },
                 "expected": "convertThisToCamel"
+            },
+            {
+                "desc": "String with leading and trailing underscores",
+                "inputs": {
+                    "sentence": "_leading_and_trailing_"
+                },
+                "expected": "leadingAndTrailing"
+            },
+            {
+                "desc": "String with consecutive underscores",
+                "inputs": {
+                    "sentence": "multiple___underscores"
+                },
+                "expected": "multipleUnderscores"
+            },
+            {
+                "desc": "String with numbers and underscores",
+                "inputs": {
+                    "sentence": "test_123_case"
+                },
+                "expected": "test123Case"
+            },
+            {
+                "desc": "String with no underscores remains unchanged except for case normalization",
+                "inputs": {
+                    "sentence": "AlreadyCamelCase"
+                },
+                "expected": "alreadycamelcase"
+            },
+            {
+                "desc": "String with only underscores should return empty string",
+                "inputs": {
+                    "sentence": "_____"
+                },
+                "expected": ""
             }
         ]
     }
