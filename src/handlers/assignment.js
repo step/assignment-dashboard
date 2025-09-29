@@ -25,11 +25,26 @@ const calculateStats = (scores) => {
 export const getAssignmentEvaluation = async (c, store) => {
   const assignmentId = c.req.param("assignmentId");
   const scores = await store.getScores(assignmentId);
-  const scoresView = scores.map(({ name, summary }) => {
+  const scoresView = scores.map(({ name, summary, results }) => {
+    // Calculate individual problem stats
+    const problemBreakdown = results.map(result => {
+      const totalTests = result.tests ? result.tests.length : 0;
+      const passedTests = result.tests ? result.tests.filter(test => test.pass).length : 0;
+      const percentage = totalTests > 0 ? Math.round((passedTests / totalTests) * 100) : 0;
+      const lintIssues = result.lintIssues ? result.lintIssues.length : 0;
+      
+      return {
+        name: result.name,
+        percentage,
+        lintIssues
+      };
+    });
+
     return {
       name,
       score: summary.percentage,
       issues: summary.lintErrors,
+      problems: problemBreakdown,
     };
   });
   const stats = await store.getStats(assignmentId);

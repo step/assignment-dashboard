@@ -38,11 +38,19 @@
 
         <div class="results-container">
             <div class="table-header">
-                Intern Results
+                <span>Intern Results</span>
                 <button id="copyMarkdownScores" class="copy-markdown-btn">Copy as Markdown Table</button>
             </div>
+            <div class="table-sub-header">
+                <div class="intern-column">Name</div>
+                <div class="overall-column">Overall</div>
+                <div class="problems-column">Individual Problems</div>
+            </div>
+            <div class="problem-headers" id="problemHeaders" style="display: none;">
+                <!-- Problem headers will be populated dynamically -->
+            </div>
             <div class="intern-list" id="internList">
-                <!-- Sample data - in real implementation this would be populated dynamically -->
+                <!-- Intern rows will be populated dynamically -->
             </div>
         </div>
     </div>
@@ -51,8 +59,20 @@
     <template id="internRowTemplate">
         <div class="intern-row">
             <div class="intern-name" data-field="name"></div>
-            <div class="score-badge" data-field="score"></div>
-            <div class="hygiene-issues" data-field="issues"></div>
+            <div class="overall-stats">
+                <div class="score-badge" data-field="score"></div>
+                <div class="hygiene-issues" data-field="issues"></div>
+            </div>
+            <div class="problem-stats" data-field="problems">
+                <!-- Individual problem stats will be populated here -->
+            </div>
+        </div>
+    </template>
+
+    <!-- HTML Template for individual problem stats -->
+    <template id="problemStatsTemplate">
+        <div class="problem-stat">
+            <div class="problem-score" data-field="percentage"></div>
         </div>
     </template>
 

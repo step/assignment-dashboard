@@ -99,6 +99,38 @@ const getHygieneClass = (issues) => {
   return "hygiene-high";
 };
 
+// Function to format problem names for display
+const formatProblemName = (problemName) => {
+  return problemName
+    .replace(/_/g, ' ')
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+};
+
+// Function to render problem headers
+const renderProblemHeaders = (problems) => {
+  const problemHeaders = document.getElementById("problemHeaders");
+  
+  if (!problems || problems.length === 0) {
+    problemHeaders.style.display = "none";
+    return;
+  }
+
+  problemHeaders.style.display = "grid";
+  
+  // Create the structure: empty space for name and overall columns, then problem headers
+  problemHeaders.innerHTML = `
+    <div></div>
+    <div></div>
+    <div class="problem-headers-grid">
+      ${problems.map(problem => 
+        `<div class="problem-header">${formatProblemName(problem.name)}</div>`
+      ).join('')}
+    </div>
+  `;
+};
+
 // Function to sort interns by score (highest first)
 const sortInternsByScore = (interns) => {
   return [...interns].sort((a, b) => b.score - a.score);
@@ -113,11 +145,38 @@ const scoresToMarkdownTable = (scores) => {
   // Sort scores by score (highest first)
   const sortedScores = sortInternsByScore(scores);
 
-  let markdown = "| Intern | Score | Issues |\n";
-  markdown += "|--------|-------|--------|\n";
+  // Create header with problem columns
+  let markdown = "| Intern | Overall Score | Overall Issues |";
+  
+  // Add problem headers if we have problem data
+  if (sortedScores.length > 0 && sortedScores[0].problems && sortedScores[0].problems.length > 0) {
+    sortedScores[0].problems.forEach((_, index) => {
+      markdown += ` Problem ${index + 1} % |`;
+    });
+  }
+  
+  markdown += "\n|--------|---------------|----------------|";
+  
+  // Add problem header separators
+  if (sortedScores.length > 0 && sortedScores[0].problems && sortedScores[0].problems.length > 0) {
+    sortedScores[0].problems.forEach(() => {
+      markdown += "----------------|";
+    });
+  }
+  
+  markdown += "\n";
 
   sortedScores.forEach((intern) => {
-    markdown += `| ${intern.name} | ${intern.score}% | ${intern.issues} |\n`;
+    markdown += `| ${intern.name} | ${intern.score}% | ${intern.issues} |`;
+    
+    // Add individual problem data if available
+    if (intern.problems && intern.problems.length > 0) {
+      intern.problems.forEach((problem) => {
+        markdown += ` ${problem.percentage}% |`;
+      });
+    }
+    
+    markdown += "\n";
   });
 
   return markdown;
@@ -173,12 +232,18 @@ const renderStats = (stats) => {
 const renderInterns = (data) => {
   const internList = document.getElementById("internList");
   const template = document.getElementById("internRowTemplate");
+  const problemTemplate = document.getElementById("problemStatsTemplate");
 
   // Clear existing content
   internList.replaceChildren();
 
   // Sort data by score (highest first) before rendering
   const sortedData = sortInternsByScore(data);
+
+  // Render problem headers if we have data
+  if (sortedData.length > 0 && sortedData[0].problems) {
+    renderProblemHeaders(sortedData[0].problems);
+  }
 
   sortedData.forEach((intern) => {
     // Clone the template content
@@ -188,6 +253,7 @@ const renderInterns = (data) => {
     const nameElement = clone.querySelector('[data-field="name"]');
     const scoreElement = clone.querySelector('[data-field="score"]');
     const issuesElement = clone.querySelector('[data-field="issues"]');
+    const problemsContainer = clone.querySelector('[data-field="problems"]');
 
     nameElement.textContent = intern.name;
     scoreElement.textContent = `${intern.score}%`;
@@ -196,6 +262,22 @@ const renderInterns = (data) => {
     issuesElement.className = `hygiene-issues ${
       getHygieneClass(intern.issues)
     }`;
+
+    // Render individual problem stats
+    if (intern.problems && intern.problems.length > 0) {
+      intern.problems.forEach((problem) => {
+        const problemClone = problemTemplate.content.cloneNode(true);
+        const problemScoreElement = problemClone.querySelector('[data-field="percentage"]');
+
+        problemScoreElement.textContent = `${problem.percentage}%`;
+        problemScoreElement.className = `problem-score ${getScoreClass(problem.percentage)}`;
+
+        problemsContainer.appendChild(problemClone);
+      });
+    } else {
+      // If no problem data, show placeholder
+      problemsContainer.innerHTML = '<div class="no-problem-data">No problem data available</div>';
+    }
 
     internList.appendChild(clone);
   });
