@@ -265,6 +265,10 @@ const createAssignmentCard = (assignment) => {
   // Add click handler to simulate navigation
   cardElement.addEventListener("click", function (e) {
     e.preventDefault();
+    if(window.location.pathname.startsWith("/admin")) {
+      globalThis.window.location.assign(`/admin/${assignment.id}`);
+      return;  
+    }
     globalThis.window.location.assign(`/${assignment.id}/scores.html`);
   });
 

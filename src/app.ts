@@ -52,6 +52,7 @@ export const createApp = async () => {
     serveStatic({ path: "./public/html/scores.html" }),
   );
   app.get("/", serveStatic({ path: "./public/html/index.html" }));
+  app.get("/admin", serveStatic({ path: "./public/html/index.html" }));
 
   // Protected admin routes
   app.get(
