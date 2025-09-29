@@ -102,31 +102,33 @@ const getHygieneClass = (issues) => {
 // Function to format problem names for display
 const formatProblemName = (problemName) => {
   return problemName
-    .replace(/_/g, ' ')
-    .split(' ')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
+    .replace(/_/g, " ")
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
 };
 
 // Function to render problem headers
 const renderProblemHeaders = (problems) => {
   const problemHeaders = document.getElementById("problemHeaders");
-  
+
   if (!problems || problems.length === 0) {
     problemHeaders.style.display = "none";
     return;
   }
 
   problemHeaders.style.display = "grid";
-  
+
   // Create the structure: empty space for name and overall columns, then problem headers
   problemHeaders.innerHTML = `
     <div></div>
     <div></div>
     <div class="problem-headers-grid">
-      ${problems.map(problem => 
-        `<div class="problem-header">${formatProblemName(problem.name)}</div>`
-      ).join('')}
+      ${
+    problems.map((problem) =>
+      `<div class="problem-header">${formatProblemName(problem.name)}</div>`
+    ).join("")
+  }
     </div>
   `;
 };
@@ -147,35 +149,41 @@ const scoresToMarkdownTable = (scores) => {
 
   // Create header with problem columns
   let markdown = "| Intern | Overall Score | Overall Issues |";
-  
+
   // Add problem headers if we have problem data
-  if (sortedScores.length > 0 && sortedScores[0].problems && sortedScores[0].problems.length > 0) {
+  if (
+    sortedScores.length > 0 && sortedScores[0].problems &&
+    sortedScores[0].problems.length > 0
+  ) {
     sortedScores[0].problems.forEach((_, index) => {
       markdown += ` Problem ${index + 1} % |`;
     });
   }
-  
+
   markdown += "\n|--------|---------------|----------------|";
-  
+
   // Add problem header separators
-  if (sortedScores.length > 0 && sortedScores[0].problems && sortedScores[0].problems.length > 0) {
+  if (
+    sortedScores.length > 0 && sortedScores[0].problems &&
+    sortedScores[0].problems.length > 0
+  ) {
     sortedScores[0].problems.forEach(() => {
       markdown += "----------------|";
     });
   }
-  
+
   markdown += "\n";
 
   sortedScores.forEach((intern) => {
     markdown += `| ${intern.name} | ${intern.score}% | ${intern.issues} |`;
-    
+
     // Add individual problem data if available
     if (intern.problems && intern.problems.length > 0) {
       intern.problems.forEach((problem) => {
         markdown += ` ${problem.percentage}% |`;
       });
     }
-    
+
     markdown += "\n";
   });
 
@@ -267,16 +275,21 @@ const renderInterns = (data) => {
     if (intern.problems && intern.problems.length > 0) {
       intern.problems.forEach((problem) => {
         const problemClone = problemTemplate.content.cloneNode(true);
-        const problemScoreElement = problemClone.querySelector('[data-field="percentage"]');
+        const problemScoreElement = problemClone.querySelector(
+          '[data-field="percentage"]',
+        );
 
         problemScoreElement.textContent = `${problem.percentage}%`;
-        problemScoreElement.className = `problem-score ${getScoreClass(problem.percentage)}`;
+        problemScoreElement.className = `problem-score ${
+          getScoreClass(problem.percentage)
+        }`;
 
         problemsContainer.appendChild(problemClone);
       });
     } else {
       // If no problem data, show placeholder
-      problemsContainer.innerHTML = '<div class="no-problem-data">No problem data available</div>';
+      problemsContainer.innerHTML =
+        '<div class="no-problem-data">No problem data available</div>';
     }
 
     internList.appendChild(clone);

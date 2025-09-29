@@ -65,6 +65,7 @@ function mapApiDataToInternData(apiData) {
     total: intern.summary.total,
     passed: intern.summary.passed,
     failed: intern.summary.failed,
+    problems: intern.problems || [], // Add problems array
     results: intern.results, // Keep full results for detailed view
   }));
 }
@@ -119,12 +120,70 @@ function formatAssignmentTitle(assignmentId) {
     .join(" ") + " Assignment";
 }
 
+// Function to format problem names for display
+const formatProblemName = (problemName) => {
+  return problemName
+    .replace(/_/g, " ")
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+};
+
+// Function to render problem headers
+const renderProblemHeaders = (problems) => {
+  const problemHeaders = document.getElementById("problemHeaders");
+
+  if (!problems || problems.length === 0) {
+    problemHeaders.style.display = "none";
+    return;
+  }
+
+  problemHeaders.style.display = "grid";
+
+  // Create the structure: empty space for name and overall columns, then problem headers
+  problemHeaders.innerHTML = `
+    <div></div>
+    <div></div>
+    <div class="problem-headers-grid">
+      ${
+    problems.map((problem) =>
+      `<div class="problem-header">${formatProblemName(problem.name)}</div>`
+    ).join("")
+  }
+    </div>
+  `;
+};
+
+// Helper function to get score class
+const getScoreClass = (score) => {
+  if (score >= 80) return "score-pass";
+  if (score >= 70) return "score-warning";
+  return "score-fail";
+};
+
 function renderInternList() {
   const internList = document.getElementById("intern-list");
+
+  // Clear existing content but keep the header
+  const existingHeader = internList.querySelector(".table-header");
+  const existingProblemHeaders = internList.querySelector(".problem-headers");
   internList.innerHTML = "";
+
+  // Re-add the header
+  if (existingHeader) {
+    internList.appendChild(existingHeader);
+  }
+  if (existingProblemHeaders) {
+    internList.appendChild(existingProblemHeaders);
+  }
 
   // Sort interns by score in descending order
   const sortedInterns = [...internsData].sort((a, b) => b.score - a.score);
+
+  // Render problem headers if we have data
+  if (sortedInterns.length > 0 && sortedInterns[0].problems) {
+    renderProblemHeaders(sortedInterns[0].problems);
+  }
 
   sortedInterns.forEach((intern) => {
     const row = document.createElement("div");
@@ -138,13 +197,32 @@ function renderInternList() {
       : "low";
     const issuesClass = intern.issues === 0 ? "none" : "";
 
-    row.innerHTML = `
-            <div class="intern-name">${intern.name}</div>
-            <div class="intern-stats">
-                <div class="score ${scoreClass}">${intern.score}%</div>
-                <div class="issues ${issuesClass}">${intern.issues}</div>
-            </div>
+    // Create individual problem stats
+    let problemStatsHtml = "";
+    if (intern.problems && intern.problems.length > 0) {
+      intern.problems.forEach((problem) => {
+        const problemScoreClass = getScoreClass(problem.percentage);
+        problemStatsHtml += `
+          <div class="problem-stat">
+            <div class="problem-score ${problemScoreClass}">${problem.percentage}%</div>
+          </div>
         `;
+      });
+    } else {
+      problemStatsHtml =
+        '<div class="no-problem-data">No problem data available</div>';
+    }
+
+    row.innerHTML = `
+      <div class="intern-name">${intern.name}</div>
+      <div class="intern-stats">
+        <div class="score ${scoreClass}">${intern.score}%</div>
+        <div class="issues ${issuesClass}">${intern.issues}</div>
+      </div>
+      <div class="problem-stats">
+        ${problemStatsHtml}
+      </div>
+    `;
 
     internList.appendChild(row);
   });
