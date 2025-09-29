@@ -259,5 +259,92 @@
                 "expected": "multiple   spaces   inside"
             }
         ]
+    },
+    {
+        "name": "count_words",
+        "file": "04_count_words.js",
+        "fnName": "countWords",
+        "args": [
+            "sentence"
+        ],
+        "cases": [
+            {
+                "desc": "Empty string should return 0 words",
+                "inputs": {
+                    "sentence": ""
+                },
+                "expected": 0
+            },
+            {
+                "desc": "String with only spaces should return 0 words",
+                "inputs": {
+                    "sentence": "     "
+                },
+                "expected": 0
+            },
+            {
+                "desc": "Single word with no spaces",
+                "inputs": {
+                    "sentence": "hello"
+                },
+                "expected": 1
+            },
+            {
+                "desc": "Two words separated by a single space",
+                "inputs": {
+                    "sentence": "hello world"
+                },
+                "expected": 2
+            },
+            {
+                "desc": "Words separated by multiple spaces",
+                "inputs": {
+                    "sentence": "hello     world"
+                },
+                "expected": 2
+            },
+            {
+                "desc": "Words with leading and trailing spaces",
+                "inputs": {
+                    "sentence": "   hello world   "
+                },
+                "expected": 2
+            },
+            {
+                "desc": "Sentence with punctuation treated as part of words",
+                "inputs": {
+                    "sentence": "hello, world!"
+                },
+                "expected": 2
+            },
+            {
+                "desc": "Words separated by tabs",
+                "inputs": {
+                    "sentence": "hello\tworld"
+                },
+                "expected": 2
+            },
+            {
+                "desc": "Words separated by newlines",
+                "inputs": {
+                    "sentence": "hello\nworld"
+                },
+                "expected": 2
+            },
+            {
+                "desc": "Sentence with multiple whitespace types mixed",
+                "inputs": {
+                    "sentence": "hello   \t   world \n test"
+                },
+                "expected": 3
+            },
+            {
+                "desc": "Longer sentence with punctuation and spaces",
+                "inputs": {
+                    "sentence": "The quick, brown fox jumps over the lazy dog."
+                },
+                "expected": 9
+            }
+        ]
     }
 ]
