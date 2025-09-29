@@ -63,7 +63,7 @@ export const createApp = async () => {
   // Static files (public)
   app.get("*", serveStatic({ root: "./public" }));
 
-  app.get("/clear", requireAuth, async (c) => {
+  app.post("/clear", requireAuth, async (c) => {
     await store.clear();
     return c.json({ status: "cleared" });
   });
