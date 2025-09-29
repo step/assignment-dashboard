@@ -5,13 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="pageTitle">Assignment Results</title>
-    <script>
-        // Cache busting for CSS file
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = `/css/index.css?v=${Date.now()}`;
-        document.head.appendChild(link);
-    </script>
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 
 <body>
@@ -90,12 +84,7 @@
         </div>
     </template>
 
-    <script>
-        // Cache busting for JavaScript file
-        const script = document.createElement('script');
-        script.src = `/js/index.js?v=${Date.now()}`;
-        document.head.appendChild(script);
-    </script>
+    <script src="/js/index.js"></script>
 </body>
 
 </html>
