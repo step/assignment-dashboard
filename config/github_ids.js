@@ -56,4 +56,5 @@ export const githubIds = [
   { name: "Dinesh Kumar", id: "dineshkumar8700" },
   { name: "Khasim", id: "scriptingmaverick" },
   { name: "Dasari Karthik", id: "dasarikarthik-06" },
+  { name: "Ashish Kumar", id: "ashishkujoy" },
 ];

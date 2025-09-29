@@ -179,5 +179,85 @@
                 "expected": "!dlroW ,olleH"
             }
         ]
+    },
+    {
+        "name": "trim",
+        "file": "03_trim.js",
+        "fnName": "trim",
+        "args": [
+            "sentence"
+        ],
+        "cases": [
+            {
+                "desc": "Empty string should return empty string",
+                "inputs": {
+                    "sentence": ""
+                },
+                "expected": ""
+            },
+            {
+                "desc": "String without spaces should remain unchanged",
+                "inputs": {
+                    "sentence": "hello"
+                },
+                "expected": "hello"
+            },
+            {
+                "desc": "String with leading spaces only",
+                "inputs": {
+                    "sentence": "   hello"
+                },
+                "expected": "hello"
+            },
+            {
+                "desc": "String with trailing spaces only",
+                "inputs": {
+                    "sentence": "world   "
+                },
+                "expected": "world"
+            },
+            {
+                "desc": "String with both leading and trailing spaces",
+                "inputs": {
+                    "sentence": "   hello world   "
+                },
+                "expected": "hello world"
+            },
+            {
+                "desc": "String with only spaces",
+                "inputs": {
+                    "sentence": "     "
+                },
+                "expected": ""
+            },
+            {
+                "desc": "String with tabs and spaces around",
+                "inputs": {
+                    "sentence": "\t  hello  \t"
+                },
+                "expected": "hello"
+            },
+            {
+                "desc": "String with newline characters around",
+                "inputs": {
+                    "sentence": "\nhello\n"
+                },
+                "expected": "hello"
+            },
+            {
+                "desc": "String with multiple types of whitespace",
+                "inputs": {
+                    "sentence": " \t\n hello world \n\t "
+                },
+                "expected": "hello world"
+            },
+            {
+                "desc": "String with inner spaces preserved",
+                "inputs": {
+                    "sentence": "   multiple   spaces   inside   "
+                },
+                "expected": "multiple   spaces   inside"
+            }
+        ]
     }
 ]
