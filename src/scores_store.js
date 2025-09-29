@@ -48,6 +48,7 @@ export default class ScoresStore {
       this.#store.delete(s.key);
     });
     assignments.forEach((a) => {
+      console.log(`Clearing ${a.key}`);
       this.#store.delete(a.key);
     });
   }
