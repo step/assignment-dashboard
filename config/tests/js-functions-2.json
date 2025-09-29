@@ -346,5 +346,71 @@
                 "expected": 9
             }
         ]
+    },
+    {
+        "name": "remove_adjacent_duplicate_spaces",
+        "file": "05_remove_adjacent_duplicate_spaces.js",
+        "fnName": "removeAdjacentDuplicateSpaces",
+        "args": [
+            "sentence"
+        ],
+        "cases": [
+            {
+                "desc": "Empty string should return empty string",
+                "inputs": {
+                    "sentence": ""
+                },
+                "expected": ""
+            },
+            {
+                "desc": "String with no duplicate spaces should remain unchanged",
+                "inputs": {
+                    "sentence": "hello world"
+                },
+                "expected": "hello world"
+            },
+            {
+                "desc": "String with multiple consecutive spaces reduced to single space",
+                "inputs": {
+                    "sentence": "statement      with    two spaces"
+                },
+                "expected": "statement with two spaces"
+            },
+            {
+                "desc": "Leading and trailing multiple spaces collapsed to single space",
+                "inputs": {
+                    "sentence": "   hello    world   "
+                },
+                "expected": " hello world "
+            },
+            {
+                "desc": "String with only spaces should collapse to a single space",
+                "inputs": {
+                    "sentence": "        "
+                },
+                "expected": " "
+            },
+            {
+                "desc": "String with words separated by many spaces",
+                "inputs": {
+                    "sentence": "a     b          c"
+                },
+                "expected": "a b c"
+            },
+            {
+                "desc": "String with mixed single and multiple spaces",
+                "inputs": {
+                    "sentence": "this  is   a test"
+                },
+                "expected": "this is a test"
+            },
+            {
+                "desc": "String with spaces around punctuation",
+                "inputs": {
+                    "sentence": "hello ,    world !"
+                },
+                "expected": "hello , world !"
+            }
+        ]
     }
 ]
