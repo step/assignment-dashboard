@@ -156,13 +156,13 @@ const hideUpdateNotification = () => {
 
 // Start auto-refresh
 const startAutoRefresh = () => {
-  if (refreshInterval) {
-    clearInterval(refreshInterval);
-  }
+  // if (refreshInterval) {
+  //   clearInterval(refreshInterval);
+  // }
 
-  refreshInterval = setInterval(() => {
-    refreshData(false); // Don't show loading for automatic refreshes
-  }, REFRESH_INTERVAL_MS);
+  // refreshInterval = setInterval(() => {
+  //   refreshData(false); // Don't show loading for automatic refreshes
+  // }, REFRESH_INTERVAL_MS);
 };
 
 // Stop auto-refresh
