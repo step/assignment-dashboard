@@ -99,5 +99,85 @@
                 "expected": 0
             }
         ]
+    },
+    {
+        "name": "reverse_string",
+        "file": "02_reverse_string.js",
+        "fnName": "reverseString",
+        "args": [
+            "sentence"
+        ],
+        "cases": [
+            {
+                "desc": "Empty string should return empty string",
+                "inputs": {
+                    "str": ""
+                },
+                "expected": ""
+            },
+            {
+                "desc": "Single character string should return itself",
+                "inputs": {
+                    "str": "a"
+                },
+                "expected": "a"
+            },
+            {
+                "desc": "Simple word reversal",
+                "inputs": {
+                    "str": "hello"
+                },
+                "expected": "olleh"
+            },
+            {
+                "desc": "Palindrome should remain same when reversed",
+                "inputs": {
+                    "str": "madam"
+                },
+                "expected": "madam"
+            },
+            {
+                "desc": "Reversal of string with spaces",
+                "inputs": {
+                    "str": "hello world"
+                },
+                "expected": "dlrow olleh"
+            },
+            {
+                "desc": "Reversal of string with leading and trailing spaces",
+                "inputs": {
+                    "str": "  spaced  "
+                },
+                "expected": "  decaps  "
+            },
+            {
+                "desc": "Reversal of string with mixed alphanumeric characters",
+                "inputs": {
+                    "str": "abc123"
+                },
+                "expected": "321cba"
+            },
+            {
+                "desc": "Reversal of string with special characters",
+                "inputs": {
+                    "str": "!@#$%"
+                },
+                "expected": "%$#@!"
+            },
+            {
+                "desc": "Reversal of string with mixed case letters",
+                "inputs": {
+                    "str": "AbC"
+                },
+                "expected": "CbA"
+            },
+            {
+                "desc": "Longer sentence with punctuation",
+                "inputs": {
+                    "str": "Hello, World!"
+                },
+                "expected": "!dlroW ,olleH"
+            }
+        ]
     }
 ]
