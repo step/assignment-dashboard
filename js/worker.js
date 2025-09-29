@@ -96,8 +96,20 @@ const createJobs = async (blobURL, tests, lintConfig) => {
   );
 };
 
+const dedupResults = (results) => {
+  const alreadySeenFile = [];
+  const filtered = [];
+  for (let i = 0; i < results.length; i++) {
+    const result = results[i];
+    if (alreadySeenFile.includes(result.name)) continue;
+    alreadySeenFile.push(result.name);
+    filtered.push(result);
+  }
+  return filtered;
+};
+
 self.addEventListener("message", async (event) => {
-  const {  githubId, assignment, tests, lintConfig } = event.data;
+  const { githubId, assignment, tests, lintConfig } = event.data;
   const blobURL = "/source/" + assignment + "/" + githubId + ".zip";
 
   try {
@@ -105,8 +117,9 @@ self.addEventListener("message", async (event) => {
     const total = tests.map((x) => x.cases.length).reduce((a, b) => a + b, 0);
 
     batchWorker.queue(jobs, (results) => {
-      const summary = addSummary(results, total);
-      self.postMessage({ name: githubId, summary, results });
+      const filteredResults = dedupResults(results);
+      const summary = addSummary(filteredResults, total);
+      self.postMessage({ name: githubId, summary, results: filteredResults });
     });
   } catch (e) {
     self.postMessage({
