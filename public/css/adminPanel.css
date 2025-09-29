@@ -431,11 +431,13 @@ html {
     flex: 1;
     padding: 20px;
     overflow-y: auto;
+    overflow-x: auto;
     scroll-behavior: smooth;
     min-height: 0;
     /* Allow flex item to shrink */
     max-height: calc(100vh - 240px);
     /* Subtract header and tabs height */
+    position: relative;
 }
 
 .test-result {
@@ -444,6 +446,8 @@ html {
     border-radius: 8px;
     margin-bottom: 16px;
     padding: 20px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .test-result.passing {
@@ -493,11 +497,15 @@ html {
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
     font-size: 14px;
     color: #495057;
-    max-height: 200px;
-    overflow-y: auto;
+    max-height: 300px;
+    overflow: auto;
     white-space: pre-wrap;
     word-break: break-word;
     scroll-behavior: smooth;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    padding: 8px;
+    background: #f8f9fa;
 }
 
 .success-message {
@@ -555,9 +563,9 @@ html {
     border: 1px solid #e9ecef;
     border-radius: 4px;
     overflow: auto;
-    max-height: 600px;
-    /* Limit height to enable scrolling */
+    max-height: 70vh;
     scroll-behavior: smooth;
+    position: relative;
 }
 
 .code-container pre {
@@ -565,7 +573,8 @@ html {
     padding: 0;
     background: transparent;
     white-space: pre;
-    overflow-x: auto;
+    overflow: auto;
+    min-width: 100%;
 }
 
 .code-container code {
@@ -583,6 +592,8 @@ pre[class*="language-"] {
     overflow: auto;
     white-space: pre;
     word-wrap: normal;
+    max-height: 70vh;
+    min-width: 100%;
 }
 
 code[class*="language-"] {
@@ -701,10 +712,20 @@ code[class*="language-"] {
 
     .content {
         max-height: calc(100vh - 300px);
+        padding: 16px;
     }
 
     .test-values {
         grid-template-columns: 1fr;
+    }
+
+    .value-content {
+        max-height: 250px;
+        font-size: 13px;
+    }
+
+    .code-container {
+        max-height: 60vh;
     }
 }
 
