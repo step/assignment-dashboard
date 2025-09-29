@@ -5,7 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>React Fundamentals Assignment</title>
-    <link rel="stylesheet" href="../css/adminPanel.css">
+    <script>
+        // Cache busting for CSS file
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = `/css/adminPanel.css?v=${Date.now()}`;
+        document.head.appendChild(link);
+    </script>
     <!-- Prism.js CSS for syntax highlighting -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css"
@@ -152,7 +158,12 @@
     </div>
 
     <script src="../js/auth-utils.js"></script>
-    <script src="../js/adminPanel.js"></script>
+    <script>
+        // Cache busting for JavaScript file
+        const script = document.createElement('script');
+        script.src = `/js/adminPanel.js?v=${Date.now()}`;
+        document.head.appendChild(script);
+    </script>
     <!-- Prism.js for syntax highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
     <script
