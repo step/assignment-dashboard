@@ -412,5 +412,64 @@
                 "expected": "hello , world !"
             }
         ]
+    },
+    {
+        "name": "to_camel_case",
+        "file": "06_to_camel_case.js",
+        "fnName": "toCamelCase",
+        "args": [
+            "sentence"
+        ],
+        "cases": [
+            {
+                "desc": "Empty string should return empty string",
+                "inputs": {
+                    "sentence": ""
+                },
+                "expected": ""
+            },
+            {
+                "desc": "Single lowercase word remains unchanged",
+                "inputs": {
+                    "sentence": "hello"
+                },
+                "expected": "hello"
+            },
+            {
+                "desc": "Single uppercase word becomes lowercase",
+                "inputs": {
+                    "sentence": "HELLO"
+                },
+                "expected": "hello"
+            },
+            {
+                "desc": "Simple snake_case converts to camelCase",
+                "inputs": {
+                    "sentence": "hello_world"
+                },
+                "expected": "helloWorld"
+            },
+            {
+                "desc": "Longer snake_case string",
+                "inputs": {
+                    "sentence": "this_is_a_test"
+                },
+                "expected": "thisIsATest"
+            },
+            {
+                "desc": "String with mixed case should normalize correctly",
+                "inputs": {
+                    "sentence": "HeLLo_WoRLD_Text01"
+                },
+                "expected": "helloWorldText01"
+            },
+            {
+                "desc": "String with multiple words",
+                "inputs": {
+                    "sentence": "convert_this_to_camel"
+                },
+                "expected": "convertThisToCamel"
+            }
+        ]
     }
 ]
