@@ -1,0 +1,480 @@
+[
+  {
+    "name": "multiplication",
+    "file": "01_multiplication.js",
+    "fnName": "multiply",
+    "args": ["multiplier", "multiplicand"],
+    "cases": [
+      {
+        "desc": "product of 0 and any number should be zero",
+        "inputs": {
+          "multiplier": 0,
+          "multiplicand": 10
+        },
+        "expected": 0
+      },
+      {
+        "desc": "product of any number and 0 should be zero",
+        "inputs": {
+          "multiplier": 21,
+          "multiplicand": 0
+        },
+        "expected": 0
+      },
+      {
+        "desc": "product of 1 and any number should be the number itself",
+        "inputs": {
+          "multiplier": 1,
+          "multiplicand": 10
+        },
+        "expected": 10
+      },
+      {
+        "desc": "product of any number and 1 should be the number itself",
+        "inputs": {
+          "multiplier": 21,
+          "multiplicand": 1
+        },
+        "expected": 21
+      },
+      {
+        "desc": "product of two positive numbers should be positive",
+        "inputs": {
+          "multiplier": 21,
+          "multiplicand": 10
+        },
+        "expected": 210
+      }
+    ]
+  },
+  {
+    "name": "quotient",
+    "file": "02_quotient.js",
+    "fnName": "quotient",
+    "args": ["dividend", "divisor"],
+    "cases": [
+      {
+        "desc": "quotient of 0 and any number should be zero",
+        "inputs": {
+          "dividend": 0,
+          "divisor": 10
+        },
+        "expected": 0
+      },
+      {
+        "desc": "quotient of any number and 1 should be the number itself",
+        "inputs": {
+          "dividend": 21,
+          "divisor": 1
+        },
+        "expected": 21
+      },
+      {
+        "desc": "quotient of two positive numbers should be positive",
+        "inputs": {
+          "dividend": 210,
+          "divisor": 10
+        },
+        "expected": 21
+      }
+    ]
+  },
+  {
+    "name": "remainder",
+    "file": "03_remainder.js",
+    "fnName": "remainder",
+    "args": ["dividend", "divisor"],
+    "cases": [
+      {
+        "desc": "remainder of 0 and any number should be zero",
+        "inputs": {
+          "dividend": 0,
+          "divisor": 10
+        },
+        "expected": 0
+      },
+      {
+        "desc": "remainder of any number and 1 should be zero",
+        "inputs": {
+          "dividend": 21,
+          "divisor": 1
+        },
+        "expected": 0
+      },
+      {
+        "desc": "remainder of any number completely divisible by another number should be zero",
+        "inputs": {
+          "dividend": 210,
+          "divisor": 10
+        },
+        "expected": 0
+      },
+      {
+        "desc": "remainder of any number not completely divisible by another number",
+        "inputs": {
+          "dividend": 21,
+          "divisor": 10
+        },
+        "expected": 1
+      }
+    ]
+  },
+  {
+    "name": "isPrime",
+    "file": "04_isPrime.js",
+    "fnName": "isPrime",
+    "args": ["primeCandidate"],
+    "cases": [
+      {
+        "desc": "1 is not a prime number",
+        "inputs": {
+          "primeCandidate": 1
+        },
+        "expected": false
+      },
+      {
+        "desc": "2 is a prime number",
+        "inputs": {
+          "primeCandidate": 2
+        },
+        "expected": true
+      },
+      {
+        "desc": "3 is a prime number",
+        "inputs": {
+          "primeCandidate": 3
+        },
+        "expected": true
+      },
+      {
+        "desc": "4 is not a prime number",
+        "inputs": {
+          "primeCandidate": 4
+        },
+        "expected": false
+      },
+      {
+        "desc": "5 is a prime number",
+        "inputs": {
+          "primeCandidate": 5
+        },
+        "expected": true
+      },
+      {
+        "desc": "6 is not a prime number",
+        "inputs": {
+          "primeCandidate": 6
+        },
+        "expected": false
+      },
+      {
+        "desc": "7 is a prime number",
+        "inputs": {
+          "primeCandidate": 7
+        },
+        "expected": true
+      },
+      {
+        "desc": "13 is a prime number",
+        "inputs": {
+          "primeCandidate": 13
+        },
+        "expected": true
+      }
+    ]
+  },
+  {
+    "name": "firstPrimeAbove",
+    "file": "05_firstPrimeAbove.js",
+    "fnName": "firstPrimeAbove",
+    "args": ["number"],
+    "cases": [
+      {
+        "desc": "first prime number above 1 is 2",
+        "inputs": {
+          "number": 1
+        },
+        "expected": 2
+      },
+      {
+        "desc": "first prime number above 2 is 3",
+        "inputs": {
+          "number": 2
+        },
+        "expected": 3
+      },
+      {
+        "desc": "first prime number above 3 is 5",
+        "inputs": {
+          "number": 3
+        },
+        "expected": 5
+      },
+      {
+        "desc": "first prime number above 4 is 5",
+        "inputs": {
+          "number": 4
+        },
+        "expected": 5
+      },
+      {
+        "desc": "first prime number above 5 is 7",
+        "inputs": {
+          "number": 5
+        },
+        "expected": 7
+      },
+      {
+        "desc": "first prime number above 6 is 7",
+        "inputs": {
+          "number": 6
+        },
+        "expected": 7
+      },
+      {
+        "desc": "first prime number above 7 is 11",
+        "inputs": {
+          "number": 7
+        },
+        "expected": 11
+      },
+      {
+        "desc": "first prime number above 13 is 17",
+        "inputs": {
+          "number": 13
+        },
+        "expected": 17
+      }
+    ]
+  },
+  {
+    "name": "isPalindrome",
+    "file": "06_isPalindrome.js",
+    "fnName": "isPalindrome",
+    "args": ["palindromeCandidate"],
+    "cases": [
+      {
+        "desc": "empty string is a palindrome",
+        "inputs": {
+          "palindromeCandidate": ""
+        },
+        "expected": true
+      },
+      {
+        "desc": "single character string is a palindrome",
+        "inputs": {
+          "palindromeCandidate": "a"
+        },
+        "expected": true
+      },
+      {
+        "desc": "a even length string palindrome",
+        "inputs": {
+          "palindromeCandidate": "abba"
+        },
+        "expected": true
+      },
+      {
+        "desc": "a even length string not a palindrome",
+        "inputs": {
+          "palindromeCandidate": "abca"
+        },
+        "expected": false
+      },
+      {
+        "desc": "a odd length string palindrome",
+        "inputs": {
+          "palindromeCandidate": "abcba"
+        },
+        "expected": true
+      },
+      {
+        "desc": "a odd length string not a palindrome",
+        "inputs": {
+          "palindromeCandidate": "abcca"
+        },
+        "expected": false
+      }
+    ]
+  },
+  {
+    "name": "reverse",
+    "file": "07_reverse.js",
+    "fnName": "reverse",
+    "args": ["string"],
+    "cases": [
+      {
+        "desc": "empty string should be empty",
+        "inputs": {
+          "string": ""
+        },
+        "expected": ""
+      },
+      {
+        "desc": "single character string should be the same",
+        "inputs": {
+          "string": "a"
+        },
+        "expected": "a"
+      },
+      {
+        "desc": "a even length string should be reversed",
+        "inputs": {
+          "string": "abcd"
+        },
+        "expected": "dcba"
+      },
+      {
+        "desc": "a odd length string should be reversed",
+        "inputs": {
+          "string": "abcde"
+        },
+        "expected": "edcba"
+      }
+    ]
+  },
+  {
+    "name": "isSubString",
+    "file": "08_isSubString.js",
+    "fnName": "isSubString",
+    "args": ["string", "otherString"],
+    "cases": [
+      {
+        "desc": "empty string is not a substring of any string",
+        "inputs": {
+          "string": "abc",
+          "otherString": ""
+        },
+        "expected": false
+      },
+      {
+        "desc": "a string is a substring of itself",
+        "inputs": {
+          "string": "abc",
+          "otherString": "abc"
+        },
+        "expected": true
+      },
+      {
+        "desc": "substring not present",
+        "inputs": {
+          "string": "hello world",
+          "otherString": "worlds"
+        },
+        "expected": false
+      },
+      {
+        "desc": "substring at the start",
+        "inputs": {
+          "string": "hello world",
+          "otherString": "hello"
+        },
+        "expected": true
+      },
+      {
+        "desc": "substring at the end",
+        "inputs": {
+          "string": "hello world",
+          "otherString": "world"
+        },
+        "expected": true
+      },
+      {
+        "desc": "substring in the middle",
+        "inputs": {
+          "string": "hello world",
+          "otherString": "lo wo"
+        },
+        "expected": true
+      }
+    ]
+  },
+  {
+    "name": "findIndex",
+    "file": "09_findIndex.js",
+    "fnName": "findIndex",
+    "args": ["string", "char"],
+    "cases": [
+      {
+        "desc": "empty string should return -1",
+        "inputs": {
+          "string": "",
+          "char": "a"
+        },
+        "expected": -1
+      },
+      {
+        "desc": "character not present should return -1",
+        "inputs": {
+          "string": "abc",
+          "char": "d"
+        },
+        "expected": -1
+      },
+      {
+        "desc": "character at the start",
+        "inputs": {
+          "string": "abc",
+          "char": "a"
+        },
+        "expected": 0
+      },
+      {
+        "desc": "character at the end",
+        "inputs": {
+          "string": "abc",
+          "char": "c"
+        },
+        "expected": 2
+      },
+      {
+        "desc": "character in the middle",
+        "inputs": {
+          "string": "abcdefgh",
+          "char": "e"
+        },
+        "expected": 4
+      }
+    ]
+  },
+  {
+    "name": "findLastIndex",
+    "file": "10_findLastIndex.js",
+    "fnName": "findLastIndex",
+    "args": ["string", "char"],
+    "cases": [
+      {
+        "desc": "empty string should return -1",
+        "inputs": {
+          "string": "",
+          "char": "a"
+        },
+        "expected": -1
+      },
+      {
+        "desc": "character not present should return -1",
+        "inputs": {
+          "string": "abc",
+          "char": "d"
+        },
+        "expected": -1
+      },
+      {
+        "desc": "last index when character is present only once",
+        "inputs": {
+          "string": "abcaf",
+          "char": "c"
+        },
+        "expected": 2
+      },
+      {
+        "desc": "last index when character is present multiple times",
+        "inputs": {
+          "string": "abacdefahj",
+          "char": "a"
+        },
+        "expected": 7
+      }
+    ]
+  }
+]
