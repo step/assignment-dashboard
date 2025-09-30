@@ -46,6 +46,7 @@ html {
 .flex-column {
     display: flex;
     flex-direction: column;
+    justify-self: center;
 }
 
 .header {
@@ -416,9 +417,9 @@ html {
     display: flex;
     margin: 0 16px;
     gap: 0;
-    height: calc(100vh - 140px);
+    /* height: calc(100vh - 140px); */
     /* Subtract header height */
-    max-height: calc(100vh - 140px);
+    /* max-height: calc(100vh - 140px); */
 }
 
 .sidebar {
@@ -524,6 +525,8 @@ html {
 }
 
 .test-result {
+    display: flex;
+    justify-content: space-between;
     background: #f8f9fa;
     border: 1px solid #e9ecef;
     border-radius: 8px;
