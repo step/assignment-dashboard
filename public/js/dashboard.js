@@ -3,9 +3,6 @@ let assignmentsData = [];
 let refreshInterval = null;
 let isRefreshing = false;
 
-// Configuration
-const REFRESH_INTERVAL_MS = 30000; // 30 seconds
-
 // Fetch assignments from API
 const fetchAssignments = async () => {
   try {
