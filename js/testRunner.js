@@ -6,6 +6,9 @@ const areEqual = (actual, expected, orderIndependent) => {
       if (expected === "NaN") {
         return actual.toString() === "NaN";
       }
+      if (expected === "undefined") {
+        return actual === undefined;
+      }
       return chai.expect(actual).to.equal(expected);
     case "number":
       if (Number.isInteger(expected)) {
@@ -61,7 +64,10 @@ const funcifyFn = (code, fnName, args, allowMultipleLogs) => {
 
 const runTestsForSingleFn = (fn, args, cases, orderIndependent) => {
   return cases.map((testCase) => {
-    const actualArgs = args.map((arg) => testCase.inputs[arg]);
+    const actualArgs = args.map((arg) => {
+      const value = testCase.inputs[arg];
+      return value === "undefined" ? undefined : value;
+    });
     const actual = fn(...actualArgs);
     return {
       ...testCase,

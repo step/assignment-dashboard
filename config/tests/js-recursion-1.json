@@ -3,7 +3,10 @@
     "name": "multiplication",
     "file": "01_multiplication.js",
     "fnName": "multiply",
-    "args": ["multiplier", "multiplicand"],
+    "args": [
+      "multiplier",
+      "multiplicand"
+    ],
     "cases": [
       {
         "desc": "product of 0 and any number should be zero",
@@ -51,7 +54,10 @@
     "name": "quotient",
     "file": "02_quotient.js",
     "fnName": "quotient",
-    "args": ["dividend", "divisor"],
+    "args": [
+      "dividend",
+      "divisor"
+    ],
     "cases": [
       {
         "desc": "quotient of 0 and any number should be zero",
@@ -83,7 +89,10 @@
     "name": "remainder",
     "file": "03_remainder.js",
     "fnName": "remainder",
-    "args": ["dividend", "divisor"],
+    "args": [
+      "dividend",
+      "divisor"
+    ],
     "cases": [
       {
         "desc": "remainder of 0 and any number should be zero",
@@ -123,7 +132,9 @@
     "name": "isPrime",
     "file": "04_isPrime.js",
     "fnName": "isPrime",
-    "args": ["primeCandidate"],
+    "args": [
+      "primeCandidate"
+    ],
     "cases": [
       {
         "desc": "1 is not a prime number",
@@ -187,7 +198,9 @@
     "name": "firstPrimeAbove",
     "file": "05_firstPrimeAbove.js",
     "fnName": "firstPrimeAbove",
-    "args": ["number"],
+    "args": [
+      "number"
+    ],
     "cases": [
       {
         "desc": "first prime number above 1 is 2",
@@ -251,7 +264,9 @@
     "name": "isPalindrome",
     "file": "06_isPalindrome.js",
     "fnName": "isPalindrome",
-    "args": ["palindromeCandidate"],
+    "args": [
+      "palindromeCandidate"
+    ],
     "cases": [
       {
         "desc": "empty string is a palindrome",
@@ -301,7 +316,9 @@
     "name": "reverse",
     "file": "07_reverse.js",
     "fnName": "reverse",
-    "args": ["string"],
+    "args": [
+      "string"
+    ],
     "cases": [
       {
         "desc": "empty string should be empty",
@@ -337,7 +354,10 @@
     "name": "isSubString",
     "file": "08_isSubString.js",
     "fnName": "isSubString",
-    "args": ["string", "otherString"],
+    "args": [
+      "string",
+      "otherString"
+    ],
     "cases": [
       {
         "desc": "empty string is not a substring of any string",
@@ -393,7 +413,10 @@
     "name": "findIndex",
     "file": "09_findIndex.js",
     "fnName": "findIndex",
-    "args": ["string", "char"],
+    "args": [
+      "string",
+      "char"
+    ],
     "cases": [
       {
         "desc": "empty string should return -1",
@@ -434,6 +457,14 @@
           "char": "e"
         },
         "expected": 4
+      },
+      {
+        "desc": "index of undefined character should be -1",
+        "inputs": {
+          "string": "abc",
+          "char": "undefined"
+        },
+        "expected": -1
       }
     ]
   },
@@ -441,7 +472,10 @@
     "name": "findLastIndex",
     "file": "10_findLastIndex.js",
     "fnName": "findLastIndex",
-    "args": ["string", "char"],
+    "args": [
+      "string",
+      "char"
+    ],
     "cases": [
       {
         "desc": "empty string should return -1",
@@ -474,6 +508,14 @@
           "char": "a"
         },
         "expected": 7
+      },
+      {
+        "desc": "index of undefined character should be -1",
+        "inputs": {
+          "string": "abc",
+          "char": "undefined"
+        },
+        "expected": -1
       }
     ]
   }
