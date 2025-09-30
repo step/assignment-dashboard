@@ -257,7 +257,7 @@ body {
 
 .problem-stat {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     padding: 6px 4px;
@@ -265,6 +265,7 @@ body {
     background: #f8f9fa;
     border: 1px solid #e9ecef;
     min-height: 32px;
+    gap: 2px;
 }
 
 .problem-score {
@@ -274,6 +275,27 @@ body {
     border-radius: 8px;
     min-width: 32px;
     text-align: center;
+}
+
+.problem-lint-issues {
+    font-size: 10px;
+    font-weight: 500;
+    padding: 2px 4px;
+    border-radius: 6px;
+    min-width: 20px;
+    text-align: center;
+    color: #6c757d;
+    background: #e9ecef;
+}
+
+.problem-lint-issues.has-issues {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.problem-lint-issues.many-issues {
+    background: #f8d7da;
+    color: #721c24;
 }
 
 .problem-score.score-pass {

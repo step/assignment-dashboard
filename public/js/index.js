@@ -99,6 +99,12 @@ const getHygieneClass = (issues) => {
   return "hygiene-high";
 };
 
+const getLintIssuesClass = (issues) => {
+  if (issues === 0) return "";
+  if (issues <= 3) return "has-issues";
+  return "many-issues";
+};
+
 // Function to format problem names for display
 const formatProblemName = (problemName) => {
   return problemName
@@ -156,7 +162,7 @@ const scoresToMarkdownTable = (scores) => {
     sortedScores[0].problems.length > 0
   ) {
     sortedScores[0].problems.forEach((_, index) => {
-      markdown += ` Problem ${index + 1} % |`;
+      markdown += ` Problem ${index + 1} % | Problem ${index + 1} Issues |`;
     });
   }
 
@@ -168,7 +174,7 @@ const scoresToMarkdownTable = (scores) => {
     sortedScores[0].problems.length > 0
   ) {
     sortedScores[0].problems.forEach(() => {
-      markdown += "----------------|";
+      markdown += "----------------|----------------|";
     });
   }
 
@@ -180,7 +186,7 @@ const scoresToMarkdownTable = (scores) => {
     // Add individual problem data if available
     if (intern.problems && intern.problems.length > 0) {
       intern.problems.forEach((problem) => {
-        markdown += ` ${problem.percentage}% |`;
+        markdown += ` ${problem.percentage}% | ${problem.lintIssues || 0} |`;
       });
     }
 
@@ -278,10 +284,18 @@ const renderInterns = (data) => {
         const problemScoreElement = problemClone.querySelector(
           '[data-field="percentage"]',
         );
+        const problemLintElement = problemClone.querySelector(
+          '[data-field="lintIssues"]',
+        );
 
         problemScoreElement.textContent = `${problem.percentage}%`;
         problemScoreElement.className = `problem-score ${
           getScoreClass(problem.percentage)
+        }`;
+
+        problemLintElement.textContent = problem.lintIssues || 0;
+        problemLintElement.className = `problem-lint-issues ${
+          getLintIssuesClass(problem.lintIssues || 0)
         }`;
 
         problemsContainer.appendChild(problemClone);
