@@ -1,0 +1,376 @@
+[
+  {
+    "name": "stringToNumber",
+    "file": "01_stringToNumber.js",
+    "fnName": "stringToNumber",
+    "args": ["string"],
+    "cases": [
+      {
+        "desc": "parse zero to number",
+        "inputs": { "string": "0" },
+        "expected": 0
+      },
+      {
+        "desc": "parse positive number to number",
+        "inputs": { "string": "123" },
+        "expected": 123
+      },
+      {
+        "desc": "parse negative number to number",
+        "inputs": { "string": "-123" },
+        "expected": -123
+      }
+    ]
+  },
+  {
+    "name": "nthFibonacciTerm",
+    "file": "02_nthFibonacciTerm.js",
+    "fnName": "nthFibonacciTerm",
+    "args": ["n"],
+    "cases": [
+      {
+        "desc": "get 1st term",
+        "inputs": { "n": 1 },
+        "expected": 0
+      },
+      {
+        "desc": "get 2nd term",
+        "inputs": { "n": 2 },
+        "expected": 1
+      },
+      {
+        "desc": "get 3rd term",
+        "inputs": { "n": 3 },
+        "expected": 1
+      },
+      {
+        "desc": "get 4th term",
+        "inputs": { "n": 4 },
+        "expected": 2
+      },
+      {
+        "desc": "get 5th term",
+        "inputs": { "n": 5 },
+        "expected": 3
+      },
+      {
+        "desc": "get 20th fibonacci term",
+        "inputs": { "n": 20 },
+        "expected": 4181
+      }
+    ]
+  },
+  {
+    "name": "sumOfAP",
+    "file": "03_sumOfAP.js",
+    "fnName": "sumOfAP",
+    "args": ["a", "d", "n"],
+    "cases": [
+      {
+        "desc": "get sum of 0 terms",
+        "inputs": { "a": 1, "d": 1, "n": 0 },
+        "expected": 0
+      },
+      {
+        "desc": "get sum of 1 term",
+        "inputs": { "a": 1, "d": 1, "n": 1 },
+        "expected": 1
+      },
+      {
+        "desc": "get sum of 5 terms",
+        "inputs": { "a": 1, "d": 1, "n": 5 },
+        "expected": 15
+      },
+      {
+        "desc": "get sum of 5 terms with negative common difference",
+        "inputs": { "a": 100, "d": -7, "n": 5 },
+        "expected": 430
+      },
+      {
+        "desc": "get sum of 4 terms with floating point common difference",
+        "inputs": { "a": 1.5, "d": 0.5, "n": 4 },
+        "expected": 9
+      }
+    ]
+  },
+  {
+    "name": "sumOfGP",
+    "file": "04_sumOfGP.js",
+    "fnName": "sumOfGP",
+    "args": ["a", "r", "n"],
+    "cases": [
+      {
+        "desc": "get sum of 0 terms",
+        "inputs": { "a": 1, "r": 1, "n": 0 },
+        "expected": 0
+      },
+      {
+        "desc": "get sum of 1 term",
+        "inputs": { "a": 1, "r": 1, "n": 1 },
+        "expected": 1
+      },
+      {
+        "desc": "get sum of 5 terms",
+        "inputs": { "a": 1, "r": 2, "n": 5 },
+        "expected": 31
+      },
+      {
+        "desc": "get sum of 4 terms with floating point common ratio",
+        "inputs": { "a": 1.5, "r": 0.5, "n": 4 },
+        "expected": 2.8125
+      }
+    ]
+  },
+  {
+    "name": "compoundInterest",
+    "file": "05_compoundInterest.js",
+    "fnName": "compoundInterest",
+    "args": ["p", "r", "t"],
+    "cases": [
+      {
+        "desc": "get compound interest for 0 years",
+        "inputs": { "p": 1000, "r": 10, "t": 0 },
+        "expected": 0
+      },
+      {
+        "desc": "get compound interest for 1 year",
+        "inputs": { "p": 1000, "r": 10, "t": 1 },
+        "expected": 100
+      },
+      {
+        "desc": "get compound interest for 5 years",
+        "inputs": { "p": 1000, "r": 10, "t": 5 },
+        "expected": 610.51
+      },
+      {
+        "desc": "get compound interest for 5 years with floating point rate",
+        "inputs": { "p": 1000, "r": 5, "t": 5 },
+        "expected": 276.28
+      }
+    ]
+  },
+  {
+    "name": "repeat",
+    "file": "06_repeat.js",
+    "fnName": "repeat",
+    "args": ["string", "n"],
+    "cases": [
+      {
+        "desc": "repeat string 0 times",
+        "inputs": { "string": "hello", "n": 0 },
+        "expected": ""
+      },
+      {
+        "desc": "repeat string 1 time",
+        "inputs": { "string": "hello", "n": 1 },
+        "expected": "hello"
+      },
+      {
+        "desc": "repeat string 5 times",
+        "inputs": { "string": "hello", "n": 5 },
+        "expected": "hellohellohellohellohello"
+      },
+      {
+        "desc": "repeat string 5 times with empty string",
+        "inputs": { "string": "", "n": 5 },
+        "expected": ""
+      }
+    ]
+  },
+  {
+    "name": "slice",
+    "file": "07_slice.js",
+    "fnName": "slice",
+    "args": ["text", "start", "end"],
+    "cases": [
+      {
+        "inputs": {
+          "text": "this is a statement",
+          "start": 0,
+          "end": 3
+        },
+        "expected": "this",
+        "desc": "Basic slicing within bounds"
+      },
+      {
+        "inputs": {
+          "text": "from middle till the end",
+          "start": 5,
+          "end": 23
+        },
+        "expected": "middle till the end",
+        "desc": "Slicing from middle to end"
+      },
+      {
+        "inputs": {
+          "text": "take middle part of me",
+          "start": 5,
+          "end": 15
+        },
+        "expected": "middle part",
+        "desc": "Slicing a middle portion"
+      },
+      {
+        "inputs": {
+          "text": "print me fully",
+          "start": 0,
+          "end": 13
+        },
+        "expected": "print me fully",
+        "desc": "Slicing the entire string"
+      },
+      {
+        "inputs": {
+          "text": "end is out of range",
+          "start": 14,
+          "end": 100
+        },
+        "expected": "range",
+        "desc": "Slicing with end index out of bounds"
+      },
+      {
+        "inputs": {
+          "text": "start is out of range",
+          "start": 50,
+          "end": 100
+        },
+        "expected": "",
+        "desc": "Slicing with start index out of bounds"
+      },
+      {
+        "inputs": {
+          "text": "",
+          "start": 1,
+          "end": 2
+        },
+        "expected": "",
+        "desc": "Slicing an empty string"
+      },
+      {
+        "inputs": {
+          "text": "start and end are same",
+          "start": 10,
+          "end": 10
+        },
+        "expected": "e",
+        "desc": "Slicing a single character"
+      },
+      {
+        "inputs": {
+          "text": "start range greater than end range",
+          "start": 100,
+          "end": 10
+        },
+        "expected": "",
+        "desc": "Slicing with start index greater than end index"
+      },
+      {
+        "inputs": {
+          "text": "start range is negative index",
+          "start": -2,
+          "end": 10
+        },
+        "expected": "start range",
+        "desc": "Slicing with negative start index"
+      },
+      {
+        "inputs": {
+          "text": "start range is negative index and end is greater than length",
+          "start": -2,
+          "end": 100
+        },
+        "expected": "start range is negative index and end is greater than length",
+        "desc": "Slicing with negative start index and end index out of bounds"
+      },
+      {
+        "inputs": {
+          "text": "end is equal to length",
+          "start": 3,
+          "end": 22
+        },
+        "expected": " is equal to length",
+        "desc": "Slicing from a specific index to the end of the string"
+      }
+    ]
+  },
+  {
+    "name": "replace",
+    "file": "08_replace.js",
+    "fnName": "replace",
+    "args": ["text", "target", "replacement"],
+    "cases": [
+      {
+        "desc": "Basic replacement",
+        "inputs": {
+          "text": "hello world",
+          "target": "o",
+          "replacement": "a"
+        },
+        "expected": "hella warld"
+      },
+      {
+        "desc": "Multiple replacements",
+        "inputs": {
+          "text": "Mississippi",
+          "target": "s",
+          "replacement": "x"
+        },
+        "expected": "Mixxixxippi"
+      },
+      {
+        "desc": "No matches",
+        "inputs": {
+          "text": "abcdefg",
+          "target": "z",
+          "replacement": "x"
+        },
+        "expected": "abcdefg"
+      },
+      {
+        "desc": "Empty string",
+        "inputs": {
+          "text": "",
+          "target": "a",
+          "replacement": "b"
+        },
+        "expected": ""
+      },
+      {
+        "desc": "Match character is replacement character",
+        "inputs": {
+          "text": "aaa",
+          "target": "a",
+          "replacement": "a"
+        },
+        "expected": "aaa"
+      },
+      {
+        "desc": "Match character is empty string",
+        "inputs": {
+          "text": "hello world",
+          "target": "",
+          "replacement": "x"
+        },
+        "expected": "hello world"
+      },
+      {
+        "desc": "Replacement character is empty string",
+        "inputs": {
+          "text": "hello world",
+          "target": "o",
+          "replacement": ""
+        },
+        "expected": "hell wrld"
+      },
+      {
+        "desc": "Large string",
+        "inputs": {
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          "target": "a",
+          "replacement": "x"
+        },
+        "expected": "Lorem ipsum dolor sit xmet, consectetur xdipiscing elit."
+      }
+    ]
+  }
+]
